@@ -1,0 +1,113 @@
+# =============================================================================
+# Site Settings
+# =============================================================================
+title: "Vipul Sehgal"
+description: "Mental meandering through the beautiful and bizarre"
+author: "Vipul Sehgal"
+
+# Profile image (place your image in /assets/images/ and update this path)
+profile_image: "/assets/images/profile.jpg"
+url: "https://sehgal-vip.github.io"
+baseurl: ""
+
+# =============================================================================
+# Build Settings
+# =============================================================================
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:year/:month/:title/
+
+# Plugins (GitHub Pages approved only)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Pagination
+paginate: 10
+paginate_path: "/blog/page:num/"
+
+# Kramdown settings
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# =============================================================================
+# Theme Colors (used in CSS)
+# =============================================================================
+colors:
+  primary: "#FF6B35"
+  secondary: "#00D9FF"
+  dark_bg: "#1a1a1a"
+  dark_text: "#e0e0e0"
+  light_bg: "#ffffff"
+  light_text: "#333333"
+
+# =============================================================================
+# Social Links
+# =============================================================================
+social:
+  github: "sehgal-vip"
+  twitter: "yourusername"
+  linkedin: "https://in.linkedin.com/in/vipsehgal"
+  instagram: "https://www.instagram.com/vipsehgal/"
+  substack: "https://vipulsehgal.substack.com/"
+
+# =============================================================================
+# Giscus Comments Configuration
+# =============================================================================
+# To set up Giscus:
+# 1. Go to https://github.com/apps/giscus and install on your repo
+# 2. Enable Discussions on your repository (Settings > Features > Discussions)
+# 3. Visit https://giscus.app/ to generate your configuration
+# 4. Copy the repo_id and category_id values below
+giscus:
+  repo: "sehgal-vip/sehgal-vip.github.io"
+  repo_id: "[ENTER REPO ID FROM GISCUS.APP]"
+  category: "General"
+  category_id: "[ENTER CATEGORY ID FROM GISCUS.APP]"
+  mapping: "pathname"
+  reactions_enabled: "1"
+  emit_metadata: "0"
+  input_position: "top"
+  theme: "preferred_color_scheme"
+  lang: "en"
+
+# =============================================================================
+# Google Analytics
+# =============================================================================
+# Get your Measurement ID from https://analytics.google.com/
+# It looks like: G-XXXXXXXXXX
+google_analytics: ""
+
+# =============================================================================
+# Default Front Matter
+# =============================================================================
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: true
+      share: true
+  - scope:
+      path: "pages"
+      type: "pages"
+    values:
+      layout: "page"
+
+# =============================================================================
+# Exclude from build
+# =============================================================================
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - LICENSE

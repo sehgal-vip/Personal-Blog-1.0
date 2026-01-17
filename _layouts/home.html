@@ -1,0 +1,81 @@
+---
+layout: default
+hide_breadcrumbs: true
+---
+
+<section class="hero">
+  {% if site.profile_image %}
+  <div class="hero-avatar">
+    <img src="{{ site.profile_image | relative_url }}" alt="{{ site.author }}" class="profile-image">
+  </div>
+  {% endif %}
+  <h1 class="hero-title">{{ site.title }}</h1>
+  <p class="hero-subtitle">{{ site.description }}</p>
+  <a href="{{ '/blog/' | relative_url }}" class="hero-cta">
+    Read the blog
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"></path>
+      <path d="m12 5 7 7-7 7"></path>
+    </svg>
+  </a>
+</section>
+
+{{ content }}
+
+<!-- Latest Posts Section -->
+<section class="latest-posts">
+  <div class="section-header">
+    <h2 class="section-title">Latest Posts</h2>
+    <a href="{{ '/blog/' | relative_url }}" class="section-link">View all →</a>
+  </div>
+  
+  <div class="posts-grid">
+    {% for post in site.posts limit:3 %}
+      {% include post-card.html post=post %}
+    {% endfor %}
+  </div>
+  
+  {% if site.posts.size == 0 %}
+    <p class="text-center" style="color: var(--text-muted); padding: 2rem 0;">
+      No posts yet. Start writing in the <code>_posts</code> folder!
+    </p>
+  {% endif %}
+</section>
+
+<!-- Categories Section -->
+{% if site.categories.size > 0 %}
+<section class="categories-section mt-2">
+  <div class="section-header">
+    <h2 class="section-title">Categories</h2>
+    <a href="{{ '/categories/' | relative_url }}" class="section-link">View all →</a>
+  </div>
+  
+  <div class="tag-cloud">
+    {% assign sorted_categories = site.categories | sort %}
+    {% for category in sorted_categories limit:8 %}
+      <a href="{{ '/categories/' | relative_url }}#{{ category[0] | slugify }}" class="category-badge">
+        {{ category[0] }} ({{ category[1].size }})
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- Tags Section -->
+{% if site.tags.size > 0 %}
+<section class="tags-section mt-2">
+  <div class="section-header">
+    <h2 class="section-title">Tags</h2>
+    <a href="{{ '/tags/' | relative_url }}" class="section-link">View all →</a>
+  </div>
+  
+  <div class="tag-cloud">
+    {% assign sorted_tags = site.tags | sort %}
+    {% for tag in sorted_tags limit:10 %}
+      <a href="{{ '/tags/' | relative_url }}#{{ tag[0] | slugify }}" class="tag-badge">
+        {{ tag[0] }}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

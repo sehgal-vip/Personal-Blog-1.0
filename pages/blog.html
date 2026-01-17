@@ -1,0 +1,62 @@
+---
+layout: default
+title: Blog
+description: All articles and posts
+permalink: /blog/
+---
+
+<header class="page-header">
+  <h1 class="page-title">Blog</h1>
+  <p class="page-description">Thoughts, tutorials, and everything in between.</p>
+</header>
+
+{% if site.posts.size > 0 %}
+  <div class="posts-grid">
+    {% for post in paginator.posts %}
+      {% include post-card.html post=post %}
+    {% else %}
+      {% for post in site.posts %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+  
+  <!-- Pagination -->
+  {% if paginator.total_pages > 1 %}
+  <nav class="pagination" aria-label="Pagination">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-btn" aria-label="Previous page">
+        ← Previous
+      </a>
+    {% else %}
+      <span class="pagination-btn disabled">← Previous</span>
+    {% endif %}
+    
+    {% for page_num in (1..paginator.total_pages) %}
+      {% if page_num == paginator.page %}
+        <span class="pagination-btn active" aria-current="page">{{ page_num }}</span>
+      {% elsif page_num == 1 %}
+        <a href="{{ '/blog/' | relative_url }}" class="pagination-btn">{{ page_num }}</a>
+      {% else %}
+        <a href="{{ site.paginate_path | relative_url | replace: ':num', page_num }}" class="pagination-btn">{{ page_num }}</a>
+      {% endif %}
+    {% endfor %}
+    
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-btn" aria-label="Next page">
+        Next →
+      </a>
+    {% else %}
+      <span class="pagination-btn disabled">Next →</span>
+    {% endif %}
+  </nav>
+  {% endif %}
+{% else %}
+  <div class="text-center" style="padding: 4rem 0;">
+    <p style="color: var(--text-muted); font-size: 1.125rem;">No posts yet.</p>
+    <p style="color: var(--text-muted);">
+      Create your first post in the <code>_posts</code> folder with the format:<br>
+      <code>YYYY-MM-DD-your-post-title.md</code>
+    </p>
+  </div>
+{% endif %}

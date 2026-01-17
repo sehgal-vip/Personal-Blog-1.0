@@ -1,0 +1,88 @@
+<!-- Command Palette (Cmd+K / Ctrl+K) -->
+<div id="command-palette" class="command-palette" role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="command-palette-backdrop" aria-hidden="true"></div>
+  <div class="command-palette-modal">
+    <div class="command-palette-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+      <input 
+        type="text" 
+        id="command-input" 
+        placeholder="Type a command or search..."
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-label="Search commands and posts"
+      />
+      <kbd>ESC</kbd>
+    </div>
+    
+    <div class="command-palette-body" id="command-results" role="listbox">
+      <!-- Results will be populated by JavaScript -->
+    </div>
+    
+    <div class="command-palette-footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- Command data from Jekyll -->
+<script id="command-data" type="application/json">
+{
+  "navigation": [
+    {% for cmd in site.data.commands.navigation %}
+    {
+      "name": "{{ cmd.name }}",
+      "shortcut": "{{ cmd.shortcut }}",
+      "action": "{{ cmd.action }}",
+      "url": "{{ cmd.url | relative_url }}",
+      "icon": "{{ cmd.icon }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "social": [
+    {% for cmd in site.data.commands.social %}
+    {
+      "name": "{{ cmd.name }}",
+      "shortcut": "{{ cmd.shortcut }}",
+      "action": "{{ cmd.action }}",
+      "icon": "{{ cmd.icon }}",
+      "url": "{% if cmd.icon == 'github' %}https://github.com/{{ site.social.github }}{% elsif cmd.icon == 'twitter' %}https://twitter.com/{{ site.social.twitter }}{% elsif cmd.icon == 'linkedin' %}{{ site.social.linkedin }}{% elsif cmd.icon == 'instagram' %}{{ site.social.instagram }}{% elsif cmd.icon == 'substack' %}{{ site.social.substack }}{% endif %}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "actions": [
+    {% for cmd in site.data.commands.actions %}
+    {
+      "name": "{{ cmd.name }}",
+      "shortcut": "{{ cmd.shortcut }}",
+      "action": "{{ cmd.action }}",
+      "url": "{{ cmd.url | relative_url }}",
+      "icon": "{{ cmd.icon }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
+<!-- Post data for search -->
+<script id="posts-data" type="application/json">
+[
+  {% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": "{{ post.url | relative_url }}",
+    "date": "{{ post.date | date: '%B %d, %Y' }}",
+    "excerpt": {{ post.excerpt | strip_html | truncate: 150 | jsonify }},
+    "categories": {{ post.categories | jsonify }},
+    "tags": {{ post.tags | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
+</script>

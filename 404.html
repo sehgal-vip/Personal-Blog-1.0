@@ -1,0 +1,40 @@
+---
+layout: default
+title: Page Not Found
+permalink: /404.html
+hide_breadcrumbs: true
+hide_sidebar: true
+---
+
+<div class="error-page">
+  <div class="error-code">404</div>
+  <h1 class="error-title">Page Not Found</h1>
+  <p class="error-message">
+    Oops! The page you're looking for doesn't exist or has been moved.
+  </p>
+  
+  <div style="margin-top: 2rem;">
+    <a href="{{ '/' | relative_url }}" class="hero-cta">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      Back to Home
+    </a>
+  </div>
+  
+  <div style="margin-top: 3rem;">
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">Or try these:</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ '/blog/' | relative_url }}" style="color: var(--color-primary);">Browse Blog</a>
+      <a href="{{ '/categories/' | relative_url }}" style="color: var(--color-primary);">View Categories</a>
+      <a href="{{ '/about/' | relative_url }}" style="color: var(--color-primary);">About Me</a>
+    </div>
+  </div>
+  
+  <div style="margin-top: 2rem;">
+    <p style="color: var(--text-muted); font-size: 0.875rem;">
+      Press <kbd style="padding: 0.25rem 0.5rem; background: var(--kbd-bg); border-radius: 4px; font-family: var(--font-mono);">⌘K</kbd> to search
+    </p>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="{{ '/' | relative_url }}" class="site-logo">
+      {{ site.title }}
+    </a>
+    
+    <nav class="header-nav">
+      <ul class="nav-links">
+        {% for item in site.data.navigation %}
+        <li>
+          <a href="{{ item.url | relative_url }}" class="nav-link {% if page.url == item.url %}active{% endif %}">
+            {{ item.name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      
+      <div class="header-actions">
+        <!-- Search trigger -->
+        <button class="search-trigger" data-command-palette aria-label="Open command palette">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <span>Search</span>
+          <kbd>⌘K</kbd>
+        </button>
+        
+        <!-- Theme toggle -->
+        {% include theme-toggle.html %}
+        
+        <!-- Mobile menu button -->
+        <button class="icon-btn mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>

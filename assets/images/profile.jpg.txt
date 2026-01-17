@@ -1,0 +1,9 @@
+PLACEHOLDER: Replace this file with your actual profile image.
+
+Instructions:
+1. Delete this .txt file
+2. Add your profile photo as "profile.jpg" (or .png)
+3. Recommended size: 300x300 pixels or larger
+4. Square aspect ratio works best for the circular crop
+
+The image will appear on the homepage with a circular crop and orange border.

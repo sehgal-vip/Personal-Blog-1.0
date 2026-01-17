@@ -1,0 +1,27 @@
+{% comment %}
+  Giscus Comments Integration
+  Comments are lazy-loaded when the user scrolls to this section
+{% endcomment %}
+
+<section class="comments-section" id="comments">
+  <h2 class="comments-title">Comments</h2>
+  
+  <div class="giscus-container">
+    <!-- Giscus will be loaded here by main.js -->
+  </div>
+</section>
+
+<script>
+  // Pass Giscus config to main.js
+  window.giscusConfig = {
+    repo: '{{ site.giscus.repo }}',
+    repoId: '{{ site.giscus.repo_id }}',
+    category: '{{ site.giscus.category }}',
+    categoryId: '{{ site.giscus.category_id }}',
+    mapping: '{{ site.giscus.mapping }}',
+    reactionsEnabled: '{{ site.giscus.reactions_enabled }}',
+    emitMetadata: '{{ site.giscus.emit_metadata }}',
+    inputPosition: '{{ site.giscus.input_position }}',
+    lang: '{{ site.giscus.lang }}'
+  };
+</script>

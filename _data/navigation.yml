@@ -1,0 +1,22 @@
+# Main navigation menu items
+# These appear in the header and command palette
+
+- name: Home
+  url: /
+  icon: home
+
+- name: Blog
+  url: /blog/
+  icon: blog
+
+- name: Categories
+  url: /categories/
+  icon: folder
+
+- name: Tags
+  url: /tags/
+  icon: tag
+
+- name: About
+  url: /about/
+  icon: user

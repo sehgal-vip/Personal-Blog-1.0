@@ -1,0 +1,44 @@
+---
+layout: default
+title: Categories
+description: Browse posts by category
+permalink: /categories/
+---
+
+<header class="page-header">
+  <h1 class="page-title">Categories</h1>
+  <p class="page-description">Browse all posts organized by category.</p>
+</header>
+
+{% if site.categories.size > 0 %}
+  <div class="archive-section">
+    {% assign sorted_categories = site.categories | sort %}
+    {% for category in sorted_categories %}
+      <section class="archive-category" id="{{ category[0] | slugify }}">
+        <h2 class="archive-category-title">
+          {{ category[0] }}
+          <span class="count">({{ category[1].size }} post{% if category[1].size != 1 %}s{% endif %})</span>
+        </h2>
+        
+        <ul class="archive-posts">
+          {% for post in category[1] %}
+          <li>
+            <a href="{{ post.url | relative_url }}">
+              <span>{{ post.title }}</span>
+              <span class="date">{{ post.date | date: "%b %d, %Y" }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="text-center" style="padding: 4rem 0;">
+    <p style="color: var(--text-muted); font-size: 1.125rem;">No categories yet.</p>
+    <p style="color: var(--text-muted);">
+      Add categories to your posts using the frontmatter:<br>
+      <code>categories: [Category1, Category2]</code>
+    </p>
+  </div>
+{% endif %}

@@ -1,0 +1,76 @@
+# Command Palette Actions
+# These are organized by section and appear in the command palette (Cmd+K)
+
+navigation:
+  - name: "Go to Home"
+    shortcut: "gh"
+    action: "navigate"
+    url: "/"
+    icon: "home"
+    
+  - name: "Go to Blog"
+    shortcut: "gb"
+    action: "navigate"
+    url: "/blog/"
+    icon: "blog"
+    
+  - name: "Go to Categories"
+    shortcut: "gc"
+    action: "navigate"
+    url: "/categories/"
+    icon: "folder"
+    
+  - name: "Go to Tags"
+    shortcut: "gt"
+    action: "navigate"
+    url: "/tags/"
+    icon: "tag"
+    
+  - name: "Go to About"
+    shortcut: "ga"
+    action: "navigate"
+    url: "/about/"
+    icon: "user"
+
+social:
+  - name: "Open GitHub"
+    shortcut: "og"
+    action: "external"
+    icon: "github"
+    
+  - name: "Open Twitter"
+    shortcut: "ot"
+    action: "external"
+    icon: "twitter"
+    
+  - name: "Open LinkedIn"
+    shortcut: "ol"
+    action: "external"
+    icon: "linkedin"
+    
+  - name: "Open Instagram"
+    shortcut: "oi"
+    action: "external"
+    icon: "instagram"
+    
+  - name: "Open Substack"
+    shortcut: "os"
+    action: "external"
+    icon: "substack"
+
+actions:
+  - name: "Switch Theme"
+    shortcut: "st"
+    action: "toggle-theme"
+    icon: "theme"
+    
+  - name: "Copy Page URL"
+    shortcut: "cp"
+    action: "copy-url"
+    icon: "link"
+    
+  - name: "Subscribe to RSS"
+    shortcut: "sr"
+    action: "navigate"
+    url: "/feed.xml"
+    icon: "rss"

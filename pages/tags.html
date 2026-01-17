@@ -1,0 +1,55 @@
+---
+layout: default
+title: Tags
+description: Browse posts by tag
+permalink: /tags/
+---
+
+<header class="page-header">
+  <h1 class="page-title">Tags</h1>
+  <p class="page-description">Browse all posts organized by tag.</p>
+</header>
+
+{% if site.tags.size > 0 %}
+  <!-- Tag Cloud -->
+  <div class="tag-cloud" style="margin-bottom: 3rem;">
+    {% assign sorted_tags = site.tags | sort %}
+    {% for tag in sorted_tags %}
+      <a href="#{{ tag[0] | slugify }}" class="tag-badge" style="font-size: 1rem; padding: 0.5rem 1rem;">
+        {{ tag[0] }} ({{ tag[1].size }})
+      </a>
+    {% endfor %}
+  </div>
+  
+  <!-- Tag Sections -->
+  <div class="archive-section">
+    {% assign sorted_tags = site.tags | sort %}
+    {% for tag in sorted_tags %}
+      <section class="archive-category" id="{{ tag[0] | slugify }}">
+        <h2 class="archive-category-title">
+          {{ tag[0] }}
+          <span class="count">({{ tag[1].size }} post{% if tag[1].size != 1 %}s{% endif %})</span>
+        </h2>
+        
+        <ul class="archive-posts">
+          {% for post in tag[1] %}
+          <li>
+            <a href="{{ post.url | relative_url }}">
+              <span>{{ post.title }}</span>
+              <span class="date">{{ post.date | date: "%b %d, %Y" }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="text-center" style="padding: 4rem 0;">
+    <p style="color: var(--text-muted); font-size: 1.125rem;">No tags yet.</p>
+    <p style="color: var(--text-muted);">
+      Add tags to your posts using the frontmatter:<br>
+      <code>tags: [tag1, tag2, tag3]</code>
+    </p>
+  </div>
+{% endif %}

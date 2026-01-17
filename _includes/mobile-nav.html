@@ -1,0 +1,22 @@
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <ul class="mobile-nav-links">
+    {% for item in site.data.navigation %}
+    <li>
+      <a href="{{ item.url | relative_url }}" {% if page.url == item.url %}aria-current="page"{% endif %}>
+        {{ item.name }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  
+  <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+    <button class="search-trigger" data-command-palette style="width: 100%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+      <span>Search</span>
+      <kbd>⌘K</kbd>
+    </button>
+  </div>
+</nav>
