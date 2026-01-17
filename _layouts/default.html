@@ -41,21 +41,17 @@
     
     <main id="main-content" class="main-content">
       <div class="container">
-        <div class="content-wrapper">
-          <div class="content-main">
-            {% unless page.hide_breadcrumbs %}
-              {% include breadcrumbs.html %}
-            {% endunless %}
-            
-            {{ content }}
-          </div>
-          
-          {% unless page.hide_sidebar %}
-            {% include sidebar.html %}
-          {% endunless %}
-        </div>
+        {% unless page.hide_breadcrumbs %}
+          {% include breadcrumbs.html %}
+        {% endunless %}
+        
+        {{ content }}
       </div>
     </main>
+    
+    {% unless page.hide_sidebar %}
+      {% include sidebar.html %}
+    {% endunless %}
     
     {% include footer.html %}
   </div>
