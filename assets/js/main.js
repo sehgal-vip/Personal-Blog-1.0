@@ -326,7 +326,7 @@
 
       if (!crashed) {
         if (dist > 1) {
-          const step = Math.min(5, dist);
+          const step = Math.min(3, dist);
           x += (dx / dist) * step;
           y += (dy / dist) * step;
         }
