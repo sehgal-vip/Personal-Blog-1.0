@@ -18,6 +18,7 @@
     setupReadingTime();
     setupShareButtons();
     setupLazyLoading();
+    setupRabbitChaser();
   }
 
   /**
@@ -287,6 +288,62 @@
 
       observer.observe(commentsSection);
     }
+  }
+
+  /**
+   * Animated rabbit that follows the pointer and "crashes" on contact
+   */
+  function setupRabbitChaser() {
+    const rabbit = document.createElement('div');
+    rabbit.className = 'rabbit-chaser';
+    rabbit.setAttribute('aria-hidden', 'true');
+    const stars = document.createElement('div');
+    stars.className = 'rabbit-stars';
+    rabbit.appendChild(stars);
+    document.body.appendChild(rabbit);
+
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let targetX = x;
+    let targetY = y;
+    let crashed = false;
+    let crashTimeout = null;
+
+    function onMove(e) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    }
+
+    window.addEventListener('mousemove', onMove);
+
+    function animate() {
+      const dx = targetX - x;
+      const dy = targetY - y;
+      const dist = Math.hypot(dx, dy);
+
+      if (!crashed) {
+        if (dist > 1) {
+          const step = Math.min(5, dist);
+          x += (dx / dist) * step;
+          y += (dy / dist) * step;
+        }
+
+        if (dist < 10) {
+          crashed = true;
+          rabbit.classList.add('is-crashed');
+          if (crashTimeout) clearTimeout(crashTimeout);
+          crashTimeout = setTimeout(() => {
+            crashed = false;
+            rabbit.classList.remove('is-crashed');
+          }, 600);
+        }
+      }
+
+      rabbit.style.transform = `translate(${x}px, ${y}px)`;
+      requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
   }
 
   /**
