@@ -53,12 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const isExpanded = this.getAttribute('aria-expanded') === 'true';
       
       this.setAttribute('aria-expanded', !isExpanded);
-      content.style.maxHeight = isExpanded ? '0' : content.scrollHeight + 'px';
+      content.classList.toggle('collapsed', isExpanded);
     });
-    
-    // Initialize open state
-    const content = button.nextElementSibling;
-    content.style.maxHeight = content.scrollHeight + 'px';
   });
 });
 </script>

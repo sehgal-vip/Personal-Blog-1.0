@@ -1588,7 +1588,12 @@ strong, b {
 
 .year-content {
   overflow: hidden;
+  max-height: 2000px; // Default expanded
   transition: max-height 0.3s ease;
+  
+  &.collapsed {
+    max-height: 0;
+  }
 }
 
 // Data Tables
