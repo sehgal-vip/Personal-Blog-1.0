@@ -1,0 +1,3 @@
+title,author,description,year,url
+"Attention Is All You Need","Vaswani et al.","The transformer architecture paper that changed NLP forever",2017,https://arxiv.org/abs/1706.03762
+"BERT: Pre-training of Deep Bidirectional Transformers","Devlin et al.","Bidirectional encoder representations from transformers",2018,https://arxiv.org/abs/1810.04805
