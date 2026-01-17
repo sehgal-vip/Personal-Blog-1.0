@@ -82,7 +82,7 @@ giscus:
 # =============================================================================
 # Get your Measurement ID from https://analytics.google.com/
 # It looks like: G-XXXXXXXXXX
-google_analytics: ""
+google_analytics: "G-BDFEK4W0NN"
 
 # =============================================================================
 # Default Front Matter
