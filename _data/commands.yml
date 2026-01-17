@@ -38,11 +38,6 @@ social:
     action: "external"
     icon: "github"
     
-  - name: "Open Twitter"
-    shortcut: "ot"
-    action: "external"
-    icon: "twitter"
-    
   - name: "Open LinkedIn"
     shortcut: "ol"
     action: "external"

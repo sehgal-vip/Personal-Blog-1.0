@@ -22,60 +22,87 @@ hide_breadcrumbs: true
 
 {{ content }}
 
-<!-- Latest Posts Section -->
-<section class="latest-posts">
+<!-- Latest Updates Section -->
+{% assign latest_post = site.posts.first %}
+{% assign latest_book = site.data.reading_books | last %}
+{% assign latest_paper = site.data.reading_papers | last %}
+
+<section class="latest-updates">
   <div class="section-header">
-    <h2 class="section-title">Latest Posts</h2>
+    <h2 class="section-title">Latest Updates</h2>
     <a href="{{ '/blog/' | relative_url }}" class="section-link">View all →</a>
   </div>
-  
+
   <div class="posts-grid">
-    {% for post in site.posts limit:3 %}
-      {% include post-card.html post=post %}
-    {% endfor %}
+    {% if latest_post %}
+      <a href="{{ latest_post.url | relative_url }}" class="post-card">
+        <div class="post-card-meta">
+          <span class="post-card-date">Blog</span>
+          <span class="post-card-readtime">{{ latest_post.date | date: "%b %d, %Y" }}</span>
+        </div>
+        <h3 class="post-card-title">{{ latest_post.title }}</h3>
+        {% if latest_post.excerpt %}
+          <p class="post-card-excerpt">{{ latest_post.excerpt | strip_html | truncate: 150 }}</p>
+        {% endif %}
+      </a>
+    {% endif %}
+
+    {% if latest_book %}
+      {% if latest_book.url and latest_book.url != "" %}
+        <a href="{{ latest_book.url }}" target="_blank" rel="noopener noreferrer" class="post-card">
+      {% else %}
+        <div class="post-card">
+      {% endif %}
+          <div class="post-card-meta">
+            <span class="post-card-date">Book</span>
+            <span class="post-card-readtime">{{ latest_book.year }}</span>
+          </div>
+          <h3 class="post-card-title">{{ latest_book.title }}</h3>
+          {% if latest_book.description %}
+            <p class="post-card-excerpt">{{ latest_book.description }}</p>
+          {% endif %}
+          {% if latest_book.author %}
+            <div class="post-card-tags">
+              <span class="tag-badge">{{ latest_book.author }}</span>
+            </div>
+          {% endif %}
+      {% if latest_book.url and latest_book.url != "" %}
+        </a>
+      {% else %}
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% if latest_paper %}
+      {% if latest_paper.url and latest_paper.url != "" %}
+        <a href="{{ latest_paper.url }}" target="_blank" rel="noopener noreferrer" class="post-card">
+      {% else %}
+        <div class="post-card">
+      {% endif %}
+          <div class="post-card-meta">
+            <span class="post-card-date">Paper</span>
+            <span class="post-card-readtime">{{ latest_paper.year }}</span>
+          </div>
+          <h3 class="post-card-title">{{ latest_paper.title }}</h3>
+          {% if latest_paper.description %}
+            <p class="post-card-excerpt">{{ latest_paper.description }}</p>
+          {% endif %}
+          {% if latest_paper.author %}
+            <div class="post-card-tags">
+              <span class="tag-badge">{{ latest_paper.author }}</span>
+            </div>
+          {% endif %}
+      {% if latest_paper.url and latest_paper.url != "" %}
+        </a>
+      {% else %}
+        </div>
+      {% endif %}
+    {% endif %}
   </div>
-  
-  {% if site.posts.size == 0 %}
+
+  {% unless latest_post or latest_book or latest_paper %}
     <p class="text-center" style="color: var(--text-muted); padding: 2rem 0;">
-      No posts yet. Start writing in the <code>_posts</code> folder!
+      No updates yet. Add a post or update the reading CSV files.
     </p>
-  {% endif %}
+  {% endunless %}
 </section>
-
-<!-- Categories Section -->
-{% if site.categories.size > 0 %}
-<section class="categories-section mt-2">
-  <div class="section-header">
-    <h2 class="section-title">Categories</h2>
-    <a href="{{ '/categories/' | relative_url }}" class="section-link">View all →</a>
-  </div>
-  
-  <div class="tag-cloud">
-    {% assign sorted_categories = site.categories | sort %}
-    {% for category in sorted_categories limit:8 %}
-      <a href="{{ '/categories/' | relative_url }}#{{ category[0] | slugify }}" class="category-badge">
-        {{ category[0] }} ({{ category[1].size }})
-      </a>
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
-
-<!-- Tags Section -->
-{% if site.tags.size > 0 %}
-<section class="tags-section mt-2">
-  <div class="section-header">
-    <h2 class="section-title">Tags</h2>
-    <a href="{{ '/tags/' | relative_url }}" class="section-link">View all →</a>
-  </div>
-  
-  <div class="tag-cloud">
-    {% assign sorted_tags = site.tags | sort %}
-    {% for tag in sorted_tags limit:10 %}
-      <a href="{{ '/tags/' | relative_url }}#{{ tag[0] | slugify }}" class="tag-badge">
-        {{ tag[0] }}
-      </a>
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
