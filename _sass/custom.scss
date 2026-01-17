@@ -763,6 +763,7 @@ strong, b {
   margin-bottom: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1730,93 +1731,28 @@ strong, b {
   position: fixed;
   left: 0;
   top: 0;
-  width: 28px;
-  height: 28px;
-  margin-left: -14px;
-  margin-top: -14px;
-  image-rendering: pixelated;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
   pointer-events: none;
   z-index: 2000;
   transition: transform 60ms linear;
 }
 
-.pikachu-chaser::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 4px;
-  height: 4px;
-  transform: translate(-50%, -50%);
-  background: #ffd100;
-  box-shadow:
-    -4px -8px 0 #ffd100,
-    0 -8px 0 #ffd100,
-    4px -8px 0 #ffd100,
-    -8px -4px 0 #ffd100,
-    -4px -4px 0 #ffd100,
-    0 -4px 0 #ffd100,
-    4px -4px 0 #ffd100,
-    8px -4px 0 #ffd100,
-    -8px 0 0 #ffd100,
-    -4px 0 0 #ffd100,
-    0 0 0 #ffd100,
-    4px 0 0 #ffd100,
-    8px 0 0 #ffd100,
-    -12px -12px 0 #ffd100,
-    12px -12px 0 #ffd100,
-    -12px -16px 0 #2b2b2b,
-    12px -16px 0 #2b2b2b,
-    -8px 4px 0 #ff4d4d,
-    8px 4px 0 #ff4d4d,
-    -4px 4px 0 #ffd100,
-    0 4px 0 #ffd100,
-    4px 4px 0 #ffd100,
-    -4px 8px 0 #ffd100,
-    0 8px 0 #ffd100,
-    4px 8px 0 #ffd100,
-    -4px 12px 0 #ffd100,
-    0 12px 0 #ffd100,
-    4px 12px 0 #ffd100,
-    12px 4px 0 #f2b500,
-    16px 4px 0 #f2b500,
-    16px 8px 0 #f2b500;
+.pikachu-sprite {
+  width: 100%;
+  height: 100%;
+  background: url("/assets/images/pikachu-run.png") center / contain no-repeat;
+  image-rendering: pixelated;
+  animation: pikachu-run 0.25s steps(2) infinite;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
-.pikachu-chaser.run-2::before {
-  box-shadow:
-    -4px -8px 0 #ffd100,
-    0 -8px 0 #ffd100,
-    4px -8px 0 #ffd100,
-    -8px -4px 0 #ffd100,
-    -4px -4px 0 #ffd100,
-    0 -4px 0 #ffd100,
-    4px -4px 0 #ffd100,
-    8px -4px 0 #ffd100,
-    -8px 0 0 #ffd100,
-    -4px 0 0 #ffd100,
-    0 0 0 #ffd100,
-    4px 0 0 #ffd100,
-    8px 0 0 #ffd100,
-    -12px -12px 0 #ffd100,
-    12px -12px 0 #ffd100,
-    -12px -16px 0 #2b2b2b,
-    12px -16px 0 #2b2b2b,
-    -8px 4px 0 #ff4d4d,
-    8px 4px 0 #ff4d4d,
-    -4px 4px 0 #ffd100,
-    0 4px 0 #ffd100,
-    4px 4px 0 #ffd100,
-    -4px 8px 0 #ffd100,
-    0 8px 0 #ffd100,
-    4px 8px 0 #ffd100,
-    -4px 12px 0 #ffd100,
-    0 12px 0 #ffd100,
-    4px 12px 0 #ffd100,
-    8px 6px 0 #f2b500,
-    12px 6px 0 #f2b500,
-    12px 10px 0 #f2b500;
+@keyframes pikachu-run {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
 }
 
 .chaser-stars {

@@ -295,10 +295,13 @@
    */
   function setupRabbitChaser() {
     const chaser = document.createElement('div');
-    chaser.className = 'pikachu-chaser run-1';
+    chaser.className = 'pikachu-chaser';
     chaser.setAttribute('aria-hidden', 'true');
+    const sprite = document.createElement('div');
+    sprite.className = 'pikachu-sprite';
     const stars = document.createElement('div');
     stars.className = 'chaser-stars';
+    chaser.appendChild(sprite);
     chaser.appendChild(stars);
     document.body.appendChild(chaser);
 
@@ -308,8 +311,6 @@
     let targetY = y;
     let crashed = false;
     let crashTimeout = null;
-    let frame = 0;
-    let frameTimer = null;
 
     function onMove(e) {
       targetX = e.clientX;
@@ -345,15 +346,7 @@
       requestAnimationFrame(animate);
     }
 
-    function tickFrames() {
-      frame = (frame + 1) % 2;
-      chaser.classList.toggle('run-1', frame === 0);
-      chaser.classList.toggle('run-2', frame === 1);
-      frameTimer = setTimeout(tickFrames, 120);
-    }
-
     requestAnimationFrame(animate);
-    tickFrames();
   }
 
   /**
