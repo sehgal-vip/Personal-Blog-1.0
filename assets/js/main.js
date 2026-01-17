@@ -35,12 +35,16 @@
       document.body.classList.add('sidebar-open');
       toggleBtn.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      if (backdrop) backdrop.style.display = 'block';
+      sidebar.style.transform = 'translateX(0)';
     }
 
     function closeSidebar() {
       document.body.classList.remove('sidebar-open');
       toggleBtn.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      if (backdrop) backdrop.style.display = 'none';
+      sidebar.style.transform = 'translateX(-100%)';
     }
 
     toggleBtn.addEventListener('click', () => {
