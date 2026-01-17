@@ -11,13 +11,6 @@ hide_breadcrumbs: true
   {% endif %}
   <h1 class="hero-title">{{ site.title }}</h1>
   <p class="hero-subtitle">{{ site.description }}</p>
-  <a href="{{ '/blog/' | relative_url }}" class="hero-cta">
-    Read the blog
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14"></path>
-      <path d="m12 5 7 7-7 7"></path>
-    </svg>
-  </a>
 </section>
 
 {{ content }}
@@ -30,7 +23,6 @@ hide_breadcrumbs: true
 <section class="latest-updates">
   <div class="section-header">
     <h2 class="section-title">Latest Updates</h2>
-    <a href="{{ '/blog/' | relative_url }}" class="section-link">View all →</a>
   </div>
 
   <div class="posts-grid">
