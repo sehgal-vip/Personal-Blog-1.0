@@ -112,6 +112,8 @@
   function setupEventListeners() {
     // Global keyboard shortcuts
     document.addEventListener('keydown', handleGlobalKeydown);
+    // Palette navigation keys (capture to override page scrolling)
+    document.addEventListener('keydown', handlePaletteKeydown, true);
 
     // Palette-specific events
     if (backdrop) {
@@ -167,6 +169,20 @@
       close();
       return;
     }
+  }
+
+  /**
+   * Handle palette navigation keys even if input loses focus
+   */
+  function handlePaletteKeydown(e) {
+    if (!isOpen) return;
+
+    const handledKeys = ['ArrowDown', 'ArrowUp', 'Enter', 'Tab'];
+    if (!handledKeys.includes(e.key)) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    handleInputKeydown(e);
   }
 
   /**
@@ -537,8 +553,15 @@
     // Show palette
     palette.classList.add('is-open');
 
-    // Focus input
-    setTimeout(() => input.focus(), 50);
+    // Focus input (retry on next frame to avoid focus loss)
+    requestAnimationFrame(() => {
+      input.focus({ preventScroll: true });
+    });
+    setTimeout(() => {
+      if (document.activeElement !== input) {
+        input.focus({ preventScroll: true });
+      }
+    }, 80);
 
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
