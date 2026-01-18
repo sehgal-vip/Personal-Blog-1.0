@@ -328,6 +328,10 @@
       const dx = targetX - x;
       const dy = targetY - y;
       const dist = Math.hypot(dx, dy);
+      
+      // Get actual dimensions to center the chaser
+      const chaserWidth = chaser.offsetWidth || 64;
+      const chaserHeight = 64;
 
       if (!crashed) {
         if (dist > 1) {
@@ -347,7 +351,8 @@
         }
       }
 
-      chaser.style.transform = `translate(${x}px, ${y}px)`;
+      // Center the chaser on the cursor
+      chaser.style.transform = `translate(${x - chaserWidth / 2}px, ${y - chaserHeight / 2}px)`;
       requestAnimationFrame(animate);
     }
 

@@ -1783,18 +1783,18 @@ strong, b {
   position: fixed;
   left: 0;
   top: 0;
-  width: 32px;
-  height: 32px;
-  margin-left: -16px;
-  margin-top: -16px;
+  width: auto;
+  height: 64px;
+  display: inline-block;
   pointer-events: none;
   z-index: 2000;
   transition: transform 60ms linear;
 }
 
 .pikachu-sprite {
-  width: 100%;
-  height: 100%;
+  display: block;
+  width: auto;
+  height: 64px;
   background-image: url("/assets/images/pikachu-run.png");
   background-position: center;
   background-repeat: no-repeat;
