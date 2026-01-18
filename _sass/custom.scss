@@ -1799,7 +1799,7 @@ strong, b {
   height: 64px;
   min-width: 64px;
   min-height: 64px;
-  background-image: url("/assets/images/pikachu-run.png");
+  background-image: url("/assets/images/pikachu-crash.png");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 64px 64px;
@@ -1809,14 +1809,26 @@ strong, b {
 }
 
 .pikachu-chaser.is-crashed .pikachu-sprite {
-  background-image: url("/assets/images/pikachu-crash.png");
+  background-image: url("/assets/images/pikachu-run.png");
   animation: none;
 }
 
 @keyframes pikachu-run {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
-  100% { transform: translateY(0); }
+  0% { 
+    transform: translateY(0) rotate(0deg);
+  }
+  25% { 
+    transform: translateY(-4px) rotate(-2deg);
+  }
+  50% { 
+    transform: translateY(-6px) rotate(0deg);
+  }
+  75% { 
+    transform: translateY(-4px) rotate(2deg);
+  }
+  100% { 
+    transform: translateY(0) rotate(0deg);
+  }
 }
 
 .chaser-stars {
