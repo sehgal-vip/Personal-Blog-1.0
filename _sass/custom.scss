@@ -605,44 +605,69 @@ strong, b {
 
 .hero {
   padding: 4rem 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   
   @media (min-width: 768px) {
     padding: 6rem 0;
   }
 }
 
-.hero-avatar {
-  margin-bottom: 1.5rem;
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
   
   @media (min-width: 768px) {
-    margin-bottom: 2rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+
+.hero-avatar {
+  flex-shrink: 0;
+  
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  
+  @media (max-width: 767px) {
+    align-items: center;
+    text-align: center;
   }
 }
 
 .profile-image {
-  width: clamp(96px, 18vw, 475px);
-  height: clamp(96px, 18vw, 475px);
+  width: clamp(96px, 15vw, 200px);
+  height: clamp(96px, 15vw, 200px);
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid var(--color-primary);
   box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
   
+  @media (min-width: 768px) {
+    width: clamp(120px, 12vw, 180px);
+    height: clamp(120px, 12vw, 180px);
+  }
+  
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 30px rgba(255, 107, 53, 0.4);
   }
-  
 }
 
 /* Placeholder for missing profile image */
 .profile-image-placeholder {
-  width: clamp(96px, 18vw, 475px);
-  height: clamp(96px, 18vw, 475px);
+  width: clamp(96px, 15vw, 200px);
+  height: clamp(96px, 15vw, 200px);
   border-radius: 50%;
   background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   display: flex;
@@ -651,16 +676,25 @@ strong, b {
   font-size: 3rem;
   color: white;
   font-weight: 700;
+  
+  @media (min-width: 768px) {
+    width: clamp(120px, 12vw, 180px);
+    height: clamp(120px, 12vw, 180px);
+  }
 }
 
 .hero-title {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: left;
   width: 100%;
   
   @media (min-width: 768px) {
     font-size: 3.5rem;
+  }
+  
+  @media (max-width: 767px) {
+    text-align: center;
   }
 }
 
@@ -668,8 +702,12 @@ strong, b {
   font-size: 1.25rem;
   color: var(--text-muted);
   max-width: 600px;
-  text-align: center;
-  margin-bottom: 2rem;
+  text-align: left;
+  margin-bottom: 0;
+  
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 }
 
 .hero-cta {

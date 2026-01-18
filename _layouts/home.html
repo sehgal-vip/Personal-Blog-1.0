@@ -4,13 +4,17 @@ hide_breadcrumbs: true
 ---
 
 <section class="hero">
-  {% if site.profile_image %}
-  <div class="hero-avatar">
-    <img src="{{ site.profile_image | relative_url }}" alt="{{ site.author }}" class="profile-image">
+  <div class="hero-content">
+    {% if site.profile_image %}
+    <div class="hero-avatar">
+      <img src="{{ site.profile_image | relative_url }}" alt="{{ site.author }}" class="profile-image">
+    </div>
+    {% endif %}
+    <div class="hero-text">
+      <h1 class="hero-title">{{ site.title }}</h1>
+      <p class="hero-subtitle">{{ site.description }}</p>
+    </div>
   </div>
-  {% endif %}
-  <h1 class="hero-title">{{ site.title }}</h1>
-  <p class="hero-subtitle">{{ site.description }}</p>
 </section>
 
 {{ content }}
