@@ -3,7 +3,7 @@ layout: post
 title: "Status Syndrome"
 date: 2025-12-27
 author: Vipul Sehgal
-categories: [Personal]
+categories: [Philosophy] 
 tags: [status, psychology, society]
 description: "Status isn’t vanity. It’s the operating system running every human interaction."
 ---
