@@ -1795,7 +1795,10 @@ strong, b {
 .pikachu-sprite {
   width: 100%;
   height: 100%;
-  background: url("/assets/images/pikachu-run.png") center / contain no-repeat;
+  background-image: url("/assets/images/pikachu-run.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   image-rendering: pixelated;
   animation: pikachu-run 0.6s steps(2) infinite;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
