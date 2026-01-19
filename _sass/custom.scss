@@ -1799,8 +1799,8 @@ strong, b {
   position: fixed;
   left: 0;
   top: 0;
-  width: 16px;
-  height: 16px;
+  width: 8px;
+  height: 8px;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
@@ -1815,8 +1815,8 @@ strong, b {
 }
 
 .fireball-sprite {
-  width: 16px;
-  height: 16px;
+  width: 8px;
+  height: 8px;
   position: relative;
   background: radial-gradient(circle at 30% 30%, #FFD700, #FF6B35 40%, #FF4500 70%, #8B0000);
   border-radius: 50%;
@@ -1825,65 +1825,80 @@ strong, b {
   image-rendering: crisp-edges;
   animation: fireball-glow 1s ease-in-out infinite;
   box-shadow: 
-    0 0 4px #FF6B35,
+    0 0 2px #FF6B35,
+    0 0 4px #FF4500,
+    0 0 6px #FF6B35,
     0 0 8px #FF4500,
-    0 0 12px #FF6B35,
-    0 0 16px #FF4500,
-    0 0 20px rgba(255, 107, 53, 0.5);
-  filter: drop-shadow(0 0 2px #FFD700) drop-shadow(0 0 4px #FF6B35);
+    0 0 10px rgba(255, 107, 53, 0.5);
+  filter: drop-shadow(0 0 1px #FFD700) drop-shadow(0 0 2px #FF6B35);
   
   // Pixel art effect - create blocky appearance
   &::before {
     content: "";
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 3px;
-    height: 3px;
+    top: 1px;
+    left: 1px;
+    width: 2px;
+    height: 2px;
     background: #FFD700;
     border-radius: 1px;
     box-shadow: 
-      6px 0 0 #FFD700,
-      0 6px 0 #FFD700,
-      6px 6px 0 #FFD700,
-      3px 3px 0 rgba(255, 215, 0, 0.5);
+      3px 0 0 #FFD700,
+      0 3px 0 #FFD700,
+      3px 3px 0 #FFD700,
+      1.5px 1.5px 0 rgba(255, 215, 0, 0.5);
   }
+}
+
+.comet-tail {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 107, 53, 0.9) 0%,
+    rgba(255, 69, 0, 0.7) 20%,
+    rgba(255, 140, 0, 0.5) 40%,
+    rgba(255, 215, 0, 0.3) 60%,
+    rgba(255, 107, 53, 0.2) 80%,
+    transparent 100%
+  );
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  box-shadow: 
+    0 0 2px rgba(255, 107, 53, 0.6),
+    0 0 4px rgba(255, 69, 0, 0.4),
+    0 0 6px rgba(255, 140, 0, 0.3);
+  transform-origin: top center;
+  display: none;
   
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 1px;
-    right: 1px;
-    width: 2px;
-    height: 2px;
-    background: #8B0000;
-    border-radius: 1px;
-    box-shadow: 
-      -4px 0 0 #8B0000,
-      0 -4px 0 #8B0000,
-      -4px -4px 0 #8B0000;
+  &.active {
+    display: block;
   }
 }
 
 @keyframes fireball-glow {
   0%, 100% {
     box-shadow: 
-      0 0 4px #FF6B35,
+      0 0 2px #FF6B35,
+      0 0 4px #FF4500,
+      0 0 6px #FF6B35,
       0 0 8px #FF4500,
-      0 0 12px #FF6B35,
-      0 0 16px #FF4500,
-      0 0 20px rgba(255, 107, 53, 0.5);
-    filter: drop-shadow(0 0 2px #FFD700) drop-shadow(0 0 4px #FF6B35);
+      0 0 10px rgba(255, 107, 53, 0.5);
+    filter: drop-shadow(0 0 1px #FFD700) drop-shadow(0 0 2px #FF6B35);
     transform: scale(1);
   }
   50% {
     box-shadow: 
-      0 0 6px #FF6B35,
+      0 0 3px #FF6B35,
+      0 0 6px #FF4500,
+      0 0 9px #FF6B35,
       0 0 12px #FF4500,
-      0 0 18px #FF6B35,
-      0 0 24px #FF4500,
-      0 0 30px rgba(255, 107, 53, 0.8);
-    filter: drop-shadow(0 0 3px #FFD700) drop-shadow(0 0 6px #FF6B35) drop-shadow(0 0 9px #FF4500);
+      0 0 15px rgba(255, 107, 53, 0.8);
+    filter: drop-shadow(0 0 1.5px #FFD700) drop-shadow(0 0 3px #FF6B35) drop-shadow(0 0 4.5px #FF4500);
     transform: scale(1.1);
   }
 }

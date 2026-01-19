@@ -324,7 +324,7 @@
   }
 
   /**
-   * Fireball cursor that appears when mouse is moving
+   * Fireball cursor that appears when mouse is moving (Halley's comet style)
    */
   function setupFireballCursor() {
     // Don't initialize on mobile devices
@@ -340,13 +340,22 @@
     fireball.appendChild(sprite);
     document.body.appendChild(fireball);
 
+    const tail = document.createElement('div');
+    tail.className = 'comet-tail';
+    tail.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(tail);
+
     let mouseX = 0;
     let mouseY = 0;
     let fireballX = 0;
     let fireballY = 0;
+    let prevFireballX = 0;
+    let prevFireballY = 0;
     let isMoving = false;
     let movementTimeout = null;
     let lastMoveTime = 0;
+    let velocityX = 0;
+    let velocityY = 0;
 
     function onMouseMove(e) {
       mouseX = e.clientX;
@@ -362,6 +371,7 @@
       if (!isMoving) {
         isMoving = true;
         fireball.classList.add('active');
+        tail.classList.add('active');
         // Hide default cursor
         document.body.style.cursor = 'none';
       }
@@ -370,6 +380,7 @@
       movementTimeout = setTimeout(() => {
         isMoving = false;
         fireball.classList.remove('active');
+        tail.classList.remove('active');
         document.body.style.cursor = '';
       }, 300);
     }
@@ -379,11 +390,40 @@
       const dx = mouseX - fireballX;
       const dy = mouseY - fireballY;
       
+      prevFireballX = fireballX;
+      prevFireballY = fireballY;
+      
       fireballX += dx * 0.3;
       fireballY += dy * 0.3;
       
+      // Calculate velocity for tail direction
+      velocityX = fireballX - prevFireballX;
+      velocityY = fireballY - prevFireballY;
+      
+      // Update fireball position
       fireball.style.left = fireballX + 'px';
       fireball.style.top = fireballY + 'px';
+      
+      // Update tail position and rotation
+      if (isMoving) {
+        const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+        if (speed > 0.1) {
+          // Calculate angle for tail direction (pointing opposite to movement)
+          const angle = Math.atan2(velocityY, velocityX) * (180 / Math.PI) + 90;
+          
+          // Position tail behind the comet (offset by half tail length)
+          const tailLength = 60;
+          const offsetX = -Math.sin(angle * Math.PI / 180) * (tailLength / 2);
+          const offsetY = Math.cos(angle * Math.PI / 180) * (tailLength / 2);
+          
+          tail.style.left = (fireballX + offsetX) + 'px';
+          tail.style.top = (fireballY + offsetY) + 'px';
+          tail.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;
+          tail.style.opacity = Math.min(1, speed / 10);
+        } else {
+          tail.style.opacity = 0;
+        }
+      }
       
       requestAnimationFrame(animate);
     }
@@ -391,6 +431,8 @@
     // Initialize position
     fireballX = window.innerWidth / 2;
     fireballY = window.innerHeight / 2;
+    prevFireballX = fireballX;
+    prevFireballY = fireballY;
     fireball.style.left = fireballX + 'px';
     fireball.style.top = fireballY + 'px';
 
@@ -400,6 +442,7 @@
     document.addEventListener('mouseleave', () => {
       isMoving = false;
       fireball.classList.remove('active');
+      tail.classList.remove('active');
       document.body.style.cursor = '';
       if (movementTimeout) {
         clearTimeout(movementTimeout);
