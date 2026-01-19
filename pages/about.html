@@ -1,0 +1,904 @@
+---
+layout: null
+title: About
+description: Cross-Pollination Log — or, how everything connects if you squint hard enough
+permalink: /about/
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Special+Elite&family=Space+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --teal: #008080;
+            --teal-dark: #006666;
+            --orange: #e85d04;
+            --red-ink: #8b0000;
+            --blue-ink: #1a4480;
+            --pencil: #4a4a4a;
+            --faded-pencil: #8a8a8a;
+            --paper: #f5f1e8;
+            --paper-dark: #e8e4db;
+            --charcoal: #1a1a1a;
+            --stamp-red: #c41e3a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            background: #2a2a2a;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        /* Navigation */
+        .nav-back {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #666;
+            text-decoration: none;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .nav-back:hover {
+            color: var(--teal);
+        }
+
+        /* Main document container */
+        .document-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* The "folder" / dossier frame */
+        .dossier {
+            background: #4a4a3a;
+            padding: 1rem;
+            border-radius: 2px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .dossier::before {
+            content: '';
+            position: absolute;
+            top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 8px;
+            background: #3a3a2a;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* Classification stamp */
+        .classification {
+            position: absolute;
+            top: -1rem;
+            right: 2rem;
+            font-family: 'Special Elite', monospace;
+            font-size: 0.9rem;
+            color: var(--stamp-red);
+            transform: rotate(3deg);
+            padding: 0.3rem 1rem;
+            border: 3px solid var(--stamp-red);
+            opacity: 0.8;
+            letter-spacing: 0.1em;
+        }
+
+        /* The paper pages */
+        .pages {
+            background: var(--paper);
+            position: relative;
+            box-shadow: 
+                2px 2px 8px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(0,0,0,0.1);
+        }
+
+        /* Paper texture overlay */
+        .pages::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        /* Coffee stain */
+        .coffee-stain {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at 30% 30%, 
+                transparent 40%, 
+                rgba(139, 90, 43, 0.08) 50%,
+                rgba(139, 90, 43, 0.12) 55%,
+                rgba(139, 90, 43, 0.06) 60%,
+                transparent 70%
+            );
+            pointer-events: none;
+        }
+
+        .coffee-stain-1 {
+            top: 15%;
+            right: 8%;
+            transform: rotate(15deg);
+        }
+
+        .coffee-stain-2 {
+            bottom: 25%;
+            left: 5%;
+            width: 80px;
+            height: 80px;
+            transform: rotate(-20deg);
+        }
+
+        /* Header section */
+        .doc-header {
+            padding: 3rem 4rem 2rem;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+
+        .doc-number {
+            font-family: 'Special Elite', monospace;
+            font-size: 0.75rem;
+            color: var(--faded-pencil);
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-title {
+            font-family: 'Special Elite', monospace;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: var(--blue-ink);
+            transform: rotate(-1deg);
+            margin-left: 1rem;
+        }
+
+        .doc-date {
+            position: absolute;
+            top: 2rem;
+            right: 4rem;
+            font-family: 'Special Elite', monospace;
+            font-size: 0.8rem;
+            color: var(--faded-pencil);
+        }
+
+        .doc-date-handwritten {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: var(--pencil);
+            margin-left: 0.5rem;
+        }
+
+        /* Constellation background */
+        .constellation-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.12;
+            overflow: hidden;
+        }
+
+        .constellation-bg svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .constellation-node {
+            fill: var(--teal);
+        }
+
+        .constellation-node-uncertain {
+            fill: none;
+            stroke: var(--teal);
+            stroke-width: 1;
+            stroke-dasharray: 3 2;
+        }
+
+        .constellation-line {
+            stroke: var(--teal);
+            stroke-width: 1;
+        }
+
+        .constellation-line-dotted {
+            stroke: var(--teal);
+            stroke-width: 1;
+            stroke-dasharray: 4 4;
+        }
+
+        .constellation-line-faint {
+            stroke: var(--teal);
+            stroke-width: 0.5;
+            opacity: 0.5;
+        }
+
+        /* Main content area */
+        .doc-content {
+            padding: 3rem 4rem;
+            position: relative;
+        }
+
+        /* Entry blocks */
+        .entry {
+            margin-bottom: 3rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .entry::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--teal);
+            opacity: 0.4;
+        }
+
+        .entry-date {
+            font-family: 'Special Elite', monospace;
+            font-size: 0.7rem;
+            color: var(--faded-pencil);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .entry-domain {
+            font-family: 'Special Elite', monospace;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            border-bottom: 2px solid var(--orange);
+            padding-bottom: 2px;
+        }
+
+        .entry-body {
+            font-family: 'Caveat', cursive;
+            font-size: 1.35rem;
+            line-height: 1.6;
+            color: var(--pencil);
+        }
+
+        .entry-body p {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Strikethrough with visible text */
+        .struck {
+            text-decoration: line-through;
+            text-decoration-color: var(--red-ink);
+            opacity: 0.7;
+        }
+
+        /* Handwritten corrections */
+        .correction {
+            color: var(--blue-ink);
+            font-weight: 600;
+        }
+
+        /* Circled text */
+        .circled {
+            position: relative;
+            padding: 0 0.3rem;
+        }
+
+        .circled::before {
+            content: '';
+            position: absolute;
+            inset: -4px -8px;
+            border: 2px solid var(--red-ink);
+            border-radius: 50%;
+            transform: rotate(-2deg);
+            opacity: 0.6;
+        }
+
+        /* Underlined emphasis */
+        .underlined {
+            border-bottom: 2px solid var(--pencil);
+            padding-bottom: 1px;
+        }
+
+        /* Arrow annotation */
+        .arrow-note {
+            display: inline-block;
+            margin-left: 1rem;
+            color: var(--red-ink);
+            font-size: 1.1rem;
+        }
+
+        .arrow-note::before {
+            content: '← ';
+        }
+
+        /* Margin notes */
+        .margin-note {
+            position: absolute;
+            right: -180px;
+            width: 160px;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: var(--faded-pencil);
+            transform: rotate(2deg);
+            padding: 0.5rem;
+            border-left: 2px solid var(--orange);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .entry:hover .margin-note {
+            opacity: 1;
+        }
+
+        @media (max-width: 1200px) {
+            .margin-note {
+                position: relative;
+                right: auto;
+                width: auto;
+                margin-top: 1rem;
+                margin-left: 1rem;
+                opacity: 0.7;
+            }
+
+            .entry:hover .margin-note {
+                opacity: 1;
+            }
+        }
+
+        /* Redacted blocks */
+        .redacted {
+            background: var(--charcoal);
+            color: transparent;
+            padding: 0 0.5rem;
+            margin: 0 0.2rem;
+            border-radius: 2px;
+            user-select: none;
+            position: relative;
+            cursor: help;
+        }
+
+        .redacted::after {
+            content: '[REDACTED]';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Special Elite', monospace;
+            font-size: 0.5rem;
+            color: #666;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .redacted:hover {
+            background: #333;
+        }
+
+        .redacted:hover::after {
+            content: attr(data-hint);
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* See also references */
+        .see-also {
+            font-family: 'Special Elite', monospace;
+            font-size: 0.75rem;
+            color: var(--faded-pencil);
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .see-also a {
+            color: var(--blue-ink);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--blue-ink);
+        }
+
+        /* Question marks / uncertain connections */
+        .uncertain {
+            color: var(--faded-pencil);
+            font-style: italic;
+        }
+
+        .uncertain::after {
+            content: ' ?';
+            color: var(--red-ink);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ccc 20%, #ccc 80%, transparent);
+            margin: 2.5rem 0;
+            position: relative;
+        }
+
+        .divider-note {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--paper);
+            padding: 0 1rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: var(--faded-pencil);
+        }
+
+        /* Orphan ideas section */
+        .orphans {
+            background: var(--paper-dark);
+            margin: 2rem -4rem;
+            padding: 2rem 4rem;
+            position: relative;
+        }
+
+        .orphans::before {
+            content: 'UNCONNECTED — pending integration';
+            font-family: 'Special Elite', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--faded-pencil);
+            position: absolute;
+            top: 1rem;
+            left: 4rem;
+        }
+
+        .orphan-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .orphan-item {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: var(--pencil);
+            padding: 0.5rem 1rem;
+            background: var(--paper);
+            border: 1px dashed #ccc;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .orphan-item::after {
+            content: '?';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-family: 'Special Elite', monospace;
+            font-size: 0.7rem;
+            color: var(--red-ink);
+            background: var(--paper);
+            padding: 0 4px;
+            border-radius: 50%;
+        }
+
+        /* Active investigation */
+        .active-investigation {
+            margin-top: 3rem;
+            padding: 2rem;
+            border: 2px solid var(--orange);
+            border-radius: 2px;
+            position: relative;
+            background: linear-gradient(135deg, var(--paper) 0%, rgba(232, 93, 4, 0.03) 100%);
+        }
+
+        .active-investigation::before {
+            content: 'ACTIVE INVESTIGATION';
+            position: absolute;
+            top: -0.7rem;
+            left: 1.5rem;
+            font-family: 'Special Elite', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--orange);
+            background: var(--paper);
+            padding: 0 0.5rem;
+        }
+
+        .investigation-content {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: var(--pencil);
+            line-height: 1.6;
+        }
+
+        /* Footer notes */
+        .doc-footer {
+            padding: 2rem 4rem 3rem;
+            border-top: 1px solid #ddd;
+            position: relative;
+        }
+
+        .footer-note {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: var(--blue-ink);
+            transform: rotate(-1deg);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--faded-pencil);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--teal);
+        }
+
+        /* Staple effect */
+        .staple {
+            position: absolute;
+            top: 3rem;
+            left: 1.5rem;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(90deg, #888 0%, #aaa 50%, #888 100%);
+            border-radius: 1px;
+            transform: rotate(-5deg);
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Tape effect */
+        .tape {
+            position: absolute;
+            width: 80px;
+            height: 25px;
+            background: rgba(255, 255, 200, 0.5);
+            transform: rotate(-3deg);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .tape-1 {
+            top: 2rem;
+            right: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .doc-header,
+            .doc-content,
+            .doc-footer {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .orphans {
+                margin-left: -2rem;
+                margin-right: -2rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .orphans::before {
+                left: 2rem;
+            }
+
+            .doc-date {
+                position: static;
+                margin-top: 1rem;
+            }
+
+            .classification {
+                right: 1rem;
+                font-size: 0.7rem;
+            }
+
+            .nav-back {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="{{ '/' | relative_url }}" class="nav-back">← Back to Home</a>
+
+    <div class="document-wrapper">
+        <div class="dossier">
+            <div class="classification">DECLASSIFIED</div>
+            
+            <div class="pages">
+                <div class="staple"></div>
+                <div class="tape tape-1"></div>
+                <div class="coffee-stain coffee-stain-1"></div>
+                <div class="coffee-stain coffee-stain-2"></div>
+
+                <!-- Constellation background -->
+                <div class="constellation-bg">
+                    <svg viewBox="0 0 1000 1400" preserveAspectRatio="xMidYMid slice">
+                        <!-- Main clusters -->
+                        <!-- Philosophy cluster -->
+                        <circle class="constellation-node" cx="200" cy="200" r="6"/>
+                        <circle class="constellation-node" cx="280" cy="180" r="4"/>
+                        <circle class="constellation-node" cx="240" cy="260" r="5"/>
+                        <line class="constellation-line" x1="200" y1="200" x2="280" y2="180"/>
+                        <line class="constellation-line" x1="200" y1="200" x2="240" y2="260"/>
+                        
+                        <!-- Product cluster -->
+                        <circle class="constellation-node" cx="600" cy="300" r="7"/>
+                        <circle class="constellation-node" cx="680" cy="280" r="4"/>
+                        <circle class="constellation-node" cx="650" cy="380" r="5"/>
+                        <line class="constellation-line" x1="600" y1="300" x2="680" y2="280"/>
+                        <line class="constellation-line" x1="600" y1="300" x2="650" y2="380"/>
+                        
+                        <!-- Cross-connection -->
+                        <line class="constellation-line-dotted" x1="280" y1="180" x2="600" y2="300"/>
+                        
+                        <!-- First principles cluster -->
+                        <circle class="constellation-node" cx="150" cy="500" r="5"/>
+                        <circle class="constellation-node" cx="220" cy="550" r="6"/>
+                        <circle class="constellation-node" cx="300" cy="520" r="4"/>
+                        <line class="constellation-line" x1="150" y1="500" x2="220" y2="550"/>
+                        <line class="constellation-line" x1="220" y1="550" x2="300" y2="520"/>
+                        
+                        <!-- Debugging cluster -->
+                        <circle class="constellation-node" cx="700" cy="550" r="5"/>
+                        <circle class="constellation-node" cx="780" cy="500" r="4"/>
+                        <line class="constellation-line" x1="700" y1="550" x2="780" y2="500"/>
+                        
+                        <!-- Cross-connection -->
+                        <line class="constellation-line-dotted" x1="300" y1="520" x2="700" y2="550"/>
+                        
+                        <!-- Board games -->
+                        <circle class="constellation-node" cx="400" cy="700" r="6"/>
+                        <circle class="constellation-node" cx="480" cy="680" r="4"/>
+                        <line class="constellation-line" x1="400" y1="700" x2="480" y2="680"/>
+                        
+                        <!-- Org dynamics -->
+                        <circle class="constellation-node" cx="700" cy="750" r="5"/>
+                        <line class="constellation-line-faint" x1="480" y1="680" x2="700" y2="750"/>
+                        
+                        <!-- Travel cluster -->
+                        <circle class="constellation-node" cx="850" cy="400" r="5"/>
+                        <circle class="constellation-node" cx="900" cy="350" r="3"/>
+                        <line class="constellation-line" x1="850" y1="400" x2="900" y2="350"/>
+                        
+                        <!-- Uncertain nodes -->
+                        <circle class="constellation-node-uncertain" cx="500" cy="900" r="8"/>
+                        <circle class="constellation-node-uncertain" cx="200" cy="850" r="6"/>
+                        <circle class="constellation-node-uncertain" cx="800" cy="950" r="5"/>
+                        <line class="constellation-line-dotted" x1="500" y1="900" x2="200" y2="850" opacity="0.5"/>
+                        
+                        <!-- Orphan nodes -->
+                        <circle class="constellation-node" cx="100" cy="1100" r="4" opacity="0.5"/>
+                        <circle class="constellation-node" cx="900" cy="1150" r="3" opacity="0.5"/>
+                        <circle class="constellation-node" cx="450" cy="1200" r="5" opacity="0.5"/>
+                        
+                        <!-- Faint potential connections -->
+                        <line class="constellation-line-faint" x1="650" y1="380" x2="850" y2="400" opacity="0.3"/>
+                        <line class="constellation-line-faint" x1="240" y1="260" x2="150" y2="500" opacity="0.4"/>
+                    </svg>
+                </div>
+
+                <!-- Header -->
+                <header class="doc-header">
+                    <div class="doc-number">DOC. NO. VS-AMBHR-20-02</div>
+                    <h1 class="doc-title">CROSS-POLLINATION LOG</h1>
+                    <p class="doc-subtitle">— or, how everything connects if you squint hard enough</p>
+                    <div class="doc-date">
+                        INITIATED: <span class="doc-date-handwritten">1994</span>
+                    </div>
+                </header>
+
+                <!-- Main content -->
+                <main class="doc-content">
+
+                    <!-- Entry 1: Philosophy → Product -->
+                    <article class="entry">
+                        
+                        <h2 class="entry-domain">PHILOSOPHY → PRODUCT STRATEGY</h2>
+                        <div class="entry-body">
+                            <p>
+                                Kept showing up in roadmap debates. The way I'd hold two contradictory priorities without rushing to resolve them. Finally traced it: <span class="circled">ambiguity tolerance</span>. 
+                            </p>
+                            <p>
+                                <span class="struck">Thought it was just vocabulary — sounding smart in meetings.</span> <span class="correction">No, it's the whole frame.</span> Philosophy trains you to sit with "we don't know yet" without panicking. Product needs that.
+                            </p>
+                            <p>
+                                Also: <span class="underlined">asking "what do you mean by X"</span> before solving for X. <span class="arrow-note">annoys people sometimes</span>
+                            </p>
+                        </div>
+                        <div class="see-also">cf. Wittgenstein on language games → see: <a href="#">stakeholder alignment</a></div>
+                        <div class="margin-note">
+                            re-read this after the OKR disaster of Q3. held up.
+                        </div>
+                    </article>
+
+                    <div class="divider">
+                        <span class="divider-note">pattern recognition protocol initiated</span>
+                    </div>
+
+                    <!-- Entry 2: First Principles → Debugging -->
+                    <article class="entry">
+                        
+                        <h2 class="entry-domain">FIRST PRINCIPLES → DEBUGGING</h2>
+                        <div class="entry-body">
+                            <p>
+                                Works on code. Works on arguments. Works on <span class="redacted" data-hint="still testing...">relationships</span>. 
+                            </p>
+                            <p>
+                                The move is the same: <span class="underlined">stop. what are we actually assuming here.</span> Nine times out of ten, the bug is in the assumption layer, not the logic layer.
+                            </p>
+                            <p>
+                                <span class="struck">Thought this was just "being analytical"</span> — no, it's a specific skill. Learned it from physics, reinforced by bad code reviews, now can't turn it off.
+                            </p>
+                        </div>
+                        <div class="see-also">see also: <a href="#">Feynman on cargo cult science</a></div>
+                        <div class="margin-note">
+                            applies to self-debugging too. uncomfortable but useful.
+                        </div>
+                    </article>
+
+                    <!-- Entry 3: Board Games → Org Dynamics -->
+                    <article class="entry">
+                        
+                        <h2 class="entry-domain">STRATEGY GAMES → ORGANIZATIONAL DYNAMICS</h2>
+                        <div class="entry-body">
+                            <p>
+                                Twilight Imperium taught me more about alliance formation than any management book. <span class="uncertain">Not sure if this is profound or just fun to say</span>
+                            </p>
+                            <p>
+                                Real insight: <span class="circled">resource scarcity changes behavior</span>. In games, you see it in 4 hours. In orgs, same dynamics, slower clock.
+                            </p>
+                            <p>
+                                Also: people reveal their actual decision-making style when there's no "right answer" — <span class="struck">spreadsheets can't capture this</span> <span class="correction">spreadsheets actively hide this</span>
+                            </p>
+                        </div>
+                        <div class="margin-note">
+                            run a game night before hiring for leadership? half-joking.
+                        </div>
+                    </article>
+
+                    <div class="divider"></div>
+
+                    <!-- Entry 4: Travel → Risk Calibration -->
+                    <article class="entry">
+                        
+                        <h2 class="entry-domain">TRAVEL RISK → DECISION FRAMEWORKS</h2>
+                        <div class="entry-body">
+                            <p>
+                                Kawah Ijen at 2am. Active volcano. Acid lake. Blue fire.
+                            </p>
+                            <p>
+                                <span class="underlined">Calculated risk vs. recklessness:</span> there's a guide, there's a path, there's a gas mask, there's a turn-back point. <span class="correction">The risk is real but bounded.</span>
+                            </p>
+                            <p>
+                                Realized later: this is exactly how I think about product bets. What's the <span class="struck">worst case</span> <span class="correction">realistic downside</span>? What's the escape hatch? What would make us turn back?
+                            </p>
+                            <p class="uncertain">
+                                Does this apply to career decisions too
+                            </p>
+                        </div>
+                        <div class="see-also">related: <a href="#">survivorship bias in travel stories</a></div>
+                    </article>
+
+                    <!-- Entry 5: Quizzing → Pattern Matching -->
+                    <article class="entry">
+                        
+                        <h2 class="entry-domain">QUIZZING (age 12) → CONNECTING DISPARATE FACTS</h2>
+                        <div class="entry-body">
+                            <p>
+                                This is where it started. Not the competition — the <span class="circled">rabbit holes</span>.
+                            </p>
+                            <p>
+                                "What year was X invented" → but why then? → what else was happening? → <span class="struck">oh interesting</span> → 3 hours gone.
+                            </p>
+                            <p>
+                                <span class="underlined">The skill:</span> holding random facts loosely until they suddenly connect. Can't force it. Can only feed it.
+                            </p>
+                        </div>
+                        <div class="margin-note">
+                            still happens. lost yesterday to a Wikipedia spiral about <span class="redacted" data-hint="medieval banking">█████████</span>
+                        </div>
+                    </article>
+
+                    <!-- Orphan ideas section -->
+                    <div class="orphans">
+                        <div class="orphan-list">
+                            <div class="orphan-item">cooking intuition → system design</div>
+                            <div class="orphan-item">jazz improvisation</div>
+                            <div class="orphan-item">why maps fascinate</div>
+                            <div class="orphan-item">translation as worldview</div>
+                            <div class="orphan-item">tinkering with Jekyll</div>
+                        </div>
+                    </div>
+
+                    <!-- Active investigation -->
+                    <div class="active-investigation">
+                        <div class="investigation-content">
+                            <p>
+                                Current question: <span class="underlined">what do lending systems and writing have in common?</span>
+                            </p>
+                            <p>
+                                Both are about trust calibration. Both require reading signals that aren't explicit. Both fail when you optimize for the wrong proxy metric.
+                            </p>
+                            <p>
+                                <span class="uncertain">Still pulling on this thread</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </main>
+
+                <!-- Footer -->
+                <footer class="doc-footer">
+                    <p class="footer-note">
+                        The mess is where the meaning lives. These are the containers that hold it — for now.
+                    </p>
+                    <div class="footer-links">
+                        <a href="{{ '/' | relative_url }}">← Home</a>
+                        <a href="{{ '/blog/' | relative_url }}">Blog</a>
+                        <a href="{{ '/reading/' | relative_url }}">Reading</a>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
