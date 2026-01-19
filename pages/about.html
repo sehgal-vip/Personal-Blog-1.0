@@ -58,6 +58,53 @@ hide_breadcrumbs: true
                 inset 0 1px 0 rgba(255,255,255,0.1);
             position: relative;
         }
+        
+        /* Halo effect behind dossier */
+        .dossier::after {
+            content: '';
+            position: absolute;
+            inset: -30px;
+            background: radial-gradient(ellipse at center, 
+                rgba(245, 241, 232, 0.4) 0%,
+                rgba(245, 241, 232, 0.2) 30%,
+                rgba(245, 241, 232, 0.1) 50%,
+                transparent 70%
+            );
+            border-radius: 8px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        [data-theme="dark"] .dossier::after {
+            background: radial-gradient(ellipse at center, 
+                rgba(26, 26, 26, 0.6) 0%,
+                rgba(26, 26, 26, 0.3) 30%,
+                rgba(26, 26, 26, 0.15) 50%,
+                transparent 70%
+            );
+        }
+        
+        /* Cloud effect behind pages */
+        .pages::after {
+            content: '';
+            position: absolute;
+            inset: -40px -20px;
+            background-image: 
+                radial-gradient(ellipse 200px 100px at 20% 30%, rgba(245, 241, 232, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse 150px 80px at 80% 70%, rgba(245, 241, 232, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse 180px 90px at 50% 50%, rgba(245, 241, 232, 0.2) 0%, transparent 50%);
+            border-radius: 12px;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(20px);
+        }
+        
+        [data-theme="dark"] .pages::after {
+            background-image: 
+                radial-gradient(ellipse 200px 100px at 20% 30%, rgba(26, 26, 26, 0.5) 0%, transparent 50%),
+                radial-gradient(ellipse 150px 80px at 80% 70%, rgba(26, 26, 26, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse 180px 90px at 50% 50%, rgba(26, 26, 26, 0.3) 0%, transparent 50%);
+        }
 
         [data-theme="dark"] .dossier {
             background: #3a3a2a;
@@ -237,8 +284,7 @@ hide_breadcrumbs: true
 
         /* Main content area */
         .doc-content {
-            padding: 3rem 4rem 3rem 4rem;
-            padding-right: calc(4rem + 200px); /* Extra space for margin notes */
+            padding: 3rem 4rem;
             position: relative;
             overflow: visible;
         }
@@ -343,7 +389,7 @@ hide_breadcrumbs: true
         /* Margin notes */
         .margin-note {
             position: absolute;
-            right: -140px; /* Position further to the right, in the margin area */
+            right: -200px; /* Position outside the container */
             width: 160px;
             font-family: 'Caveat', cursive;
             font-size: 1rem;
