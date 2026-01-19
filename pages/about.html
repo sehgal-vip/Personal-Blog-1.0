@@ -390,7 +390,8 @@ hide_breadcrumbs: true
         .margin-note {
             position: absolute;
             right: -200px; /* Position outside the container */
-            width: 160px;
+            width: 180px;
+            max-width: 180px;
             font-family: 'Caveat', cursive;
             font-size: 1rem;
             color: var(--faded-pencil);
@@ -403,6 +404,9 @@ hide_breadcrumbs: true
             z-index: 10; /* Bring to front */
             opacity: 0;
             transition: opacity 0.3s;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            overflow: hidden;
         }
         
         [data-theme="dark"] .margin-note {
@@ -450,21 +454,6 @@ hide_breadcrumbs: true
             cursor: help;
         }
         
-        /* Lighter redacted styling in margin notes */
-        .margin-note .redacted {
-            background: rgba(74, 74, 74, 0.3);
-            color: var(--faded-pencil);
-            opacity: 0.6;
-        }
-        
-        .margin-note .redacted::after {
-            color: var(--faded-pencil);
-            opacity: 0.8;
-        }
-        
-        .margin-note .redacted:hover {
-            background: rgba(74, 74, 74, 0.4);
-        }
 
         .redacted::after {
             content: '[REDACTED]';
