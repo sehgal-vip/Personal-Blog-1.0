@@ -7,9 +7,9 @@ permalink: /about/
 
 ## About
 
-Submerged temple at 30 meters. Blue fire on Kawah Ijen at 2am, acid lake glowing turquoise in the crater. I chase things that defy logic. The most interesting truths don't wait for certainty: *they reward curiosity*.
+Submerged temple at 30 meters. Blue fire on Kawah Ijen at 2am, acid lake glowing turquoise in the crater. I chase things that defy logic. The most interesting truths don't wait for certainty: **they reward curiosity**.
 
-In my current day avatar, I lead Product and Tech working on EV adoption in India. The problem compounds: financing vehicles for buyers with thin credit histories, leasing electric buses to operators navigating new unit economics, building risk infrastructure for a market still taking shape. I build lending systems, operational workflows, credit models—the invisible scaffolding that makes the transition possible.
+In my current day avatar, I lead Product and Tech teams working on EV adoption in India. The problem compounds: financing vehicles for buyers with thin credit histories, leasing electric buses to operators navigating new unit economics, building risk infrastructure for a market still taking shape. I build lending systems, operational workflows, credit models—the invisible scaffolding that makes the transition possible.
 
 I was that kid who lived for quizzing in school and college. The one who'd go down rabbit holes about obscure facts just because they connected to something else interesting. That same energy shows up now in how I learn: voraciously, promiscuously across domains. The Curiocity Loop is just the visible artifact of that process. It is a newsletter where I take complex ideas and make them accessible, usually through analogies that surprise us both.
 
