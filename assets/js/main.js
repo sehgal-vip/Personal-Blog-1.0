@@ -18,6 +18,7 @@
     setupReadingTime();
     setupShareButtons();
     setupLazyLoading();
+    setupFireballCursor();
   }
 
   /**
@@ -320,6 +321,93 @@
   function getGiscusTheme() {
     const theme = document.documentElement.getAttribute('data-theme');
     return theme === 'dark' ? 'dark' : 'light';
+  }
+
+  /**
+   * Fireball cursor that appears when mouse is moving
+   */
+  function setupFireballCursor() {
+    // Don't initialize on mobile devices
+    if (window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      return;
+    }
+
+    const fireball = document.createElement('div');
+    fireball.className = 'fireball-cursor';
+    fireball.setAttribute('aria-hidden', 'true');
+    const sprite = document.createElement('div');
+    sprite.className = 'fireball-sprite';
+    fireball.appendChild(sprite);
+    document.body.appendChild(fireball);
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let fireballX = 0;
+    let fireballY = 0;
+    let isMoving = false;
+    let movementTimeout = null;
+    let lastMoveTime = 0;
+
+    function onMouseMove(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      lastMoveTime = Date.now();
+
+      // Clear existing timeout
+      if (movementTimeout) {
+        clearTimeout(movementTimeout);
+      }
+
+      // Show fireball if not already moving
+      if (!isMoving) {
+        isMoving = true;
+        fireball.classList.add('active');
+        // Hide default cursor
+        document.body.style.cursor = 'none';
+      }
+
+      // Set timeout to hide fireball after 300ms of no movement
+      movementTimeout = setTimeout(() => {
+        isMoving = false;
+        fireball.classList.remove('active');
+        document.body.style.cursor = '';
+      }, 300);
+    }
+
+    function animate() {
+      // Smoothly follow cursor
+      const dx = mouseX - fireballX;
+      const dy = mouseY - fireballY;
+      
+      fireballX += dx * 0.3;
+      fireballY += dy * 0.3;
+      
+      fireball.style.left = fireballX + 'px';
+      fireball.style.top = fireballY + 'px';
+      
+      requestAnimationFrame(animate);
+    }
+
+    // Initialize position
+    fireballX = window.innerWidth / 2;
+    fireballY = window.innerHeight / 2;
+    fireball.style.left = fireballX + 'px';
+    fireball.style.top = fireballY + 'px';
+
+    window.addEventListener('mousemove', onMouseMove);
+    
+    // Handle mouse leaving viewport
+    document.addEventListener('mouseleave', () => {
+      isMoving = false;
+      fireball.classList.remove('active');
+      document.body.style.cursor = '';
+      if (movementTimeout) {
+        clearTimeout(movementTimeout);
+      }
+    });
+
+    // Start animation loop
+    animate();
   }
 
   // Initialize
