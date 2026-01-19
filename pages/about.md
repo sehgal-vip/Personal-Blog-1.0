@@ -5,37 +5,25 @@ description: Learn more about me and this blog
 permalink: /about/
 ---
 
-## Hello, I'm Vipul Sehgal! 👋
+## About
 
-Welcome to my corner of the internet.
+Submerged temple at 30 meters. Blue fire on Kawah Ijen at 2am, acid lake glowing turquoise in the crater. I chase things that defy logic. The most interesting truths don't wait for certainty: *they reward curiosity*.
 
-### What I Do
+In my current day avatar, I lead Product and Tech working on EV adoption in India. The problem compounds: financing vehicles for buyers with thin credit histories, leasing electric buses to operators navigating new unit economics, building risk infrastructure for a market still taking shape. I build lending systems, operational workflows, credit models—the invisible scaffolding that makes the transition possible.
 
-Write a brief introduction about yourself here. What are you passionate about? What do you work on? What brings you joy?
+But the real through-line started earlier: I was that kid who lived for quizzing in school and college. The one who'd go down rabbit holes about obscure facts just because they connected to something else interesting. That same energy shows up now in how I learn—voraciously, promiscuously across domains—and The Curiocity Loop is just the visible artifact of that process. A newsletter where I take complex ideas and make them accessible, usually through analogies that surprise us both.
 
-### About This Blog
+I'm after the elegant explanation that makes you see something familiar in a completely new way. First principles hiding under fifteen layers of jargon. That crystallizing moment when disparate concepts suddenly click into constellation. I have an MBA, so I can speak fluent spreadsheet when needed, but I'm more drawn to the questions that live in uncharted territory: Why do systems break the way they do? What happens at the intersection of technical precision and human messiness? How do you architect for uncertainty? And lately: what can strategy board games teach us about decision-making that spreadsheets can't?
 
-This blog is where I share my thoughts on:
+I'm a perennial learner who doesn't believe in staying in lanes. Philosophy sharpens product strategy. First principles thinking debugs both code and arguments. Every new domain is another crater to peer into—you don't know what glows until you make the trek. The best insights come from being comfortable with not knowing, then building the scaffolding to find out. Cross-pollination isn't just nice to have; it's where the breakthroughs hide.
 
-- **Technology** — Deep dives into tools, frameworks, and concepts
-- **Personal Growth** — Lessons learned along the way
-- **Projects** — Things I'm building and experimenting with
+Best thinking happens in the margins between disciplines. Compartmentalized chaos. The mess is where the meaning lives—you just need the right containers. And the willingness to reorganize when they stop serving you.
 
-### Get in Touch
+Right now I'm building lending systems, writing about AI and philosophy, maintaining a blog with Jekyll because sometimes you need to understand how things work before making them beautiful. Still mapping territories without names. Still asking what else glows in the dark.
 
-I'd love to hear from you! You can reach me through:
-
-- **Email:** [your@email.com](mailto:your@email.com)
-- **GitHub:** [@yourusername](https://github.com/yourusername)
-- **Twitter:** [@yourusername](https://twitter.com/yourusername)
-- **LinkedIn:** [Your Name](https://linkedin.com/in/yourusername)
-
-### Fun Facts
-
-- 🎯 Currently learning: [something you're learning]
-- 📚 Currently reading: [a book you're reading]
-- 🎵 Currently listening to: [music or podcast]
+You'll find me asking one more clarifying question. Making the obscure oddly clear for the genuinely curious. Somewhere between systematic and spontaneous. Probably learning something I have no business knowing. Will find a use for it eventually.
 
 ---
 
-*Feel free to explore the blog, and don't hesitate to reach out if you want to chat!*
+Always happy to talk about systems, ideas, or whatever's got you curious. Coffee's on me.  
+[LinkedIn](https://www.linkedin.com/in/vipsehgal/) | [Instagram](https://www.instagram.com/vipsehgal/) | [Email](mailto:vipuls2020@iimbg.ac.in)
