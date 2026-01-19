@@ -412,14 +412,15 @@
           const angle = Math.atan2(velocityY, velocityX) * (180 / Math.PI) + 90;
           
           // Position tail behind the comet (offset by half tail length)
-          const tailLength = 60;
+          const tailLength = 120;
           const offsetX = -Math.sin(angle * Math.PI / 180) * (tailLength / 2);
           const offsetY = Math.cos(angle * Math.PI / 180) * (tailLength / 2);
           
           tail.style.left = (fireballX + offsetX) + 'px';
           tail.style.top = (fireballY + offsetY) + 'px';
           tail.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;
-          tail.style.opacity = Math.min(1, speed / 10);
+          // Make tail more visible and adjust opacity based on speed
+          tail.style.opacity = Math.min(1, Math.max(0.6, speed / 8));
         } else {
           tail.style.opacity = 0;
         }
