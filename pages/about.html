@@ -1,23 +1,17 @@
 ---
-layout: null
+layout: default
 title: About
 description: Cross-Pollination Log — or, how everything connects if you squint hard enough
 permalink: /about/
+hide_sidebar: true
+hide_breadcrumbs: true
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | {{ site.title }}</title>
-    <meta name="description" content="{{ page.description }}">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Special+Elite&family=Space+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Special+Elite&family=Space+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
         :root {
             --teal: #008080;
             --teal-dark: #006666;
@@ -32,39 +26,24 @@ permalink: /about/
             --stamp-red: #c41e3a;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* About page specific styles */
+        .about-page-wrapper {
+            margin: -2rem calc(-1 * clamp(1.5rem, 4vw, 4rem));
+            padding: 2rem clamp(1.5rem, 4vw, 4rem);
+            background: var(--bg-color);
+            min-height: calc(100vh - var(--header-height) - 4rem);
         }
 
-        body {
-            font-family: 'Libre Baskerville', Georgia, serif;
-            background: #2a2a2a;
-            min-height: 100vh;
-            padding: 2rem;
+        [data-theme="dark"] .about-page-wrapper {
+            background: var(--bg-color);
         }
 
-        /* Navigation */
-        .nav-back {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #666;
-            text-decoration: none;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.2s;
-        }
-
-        .nav-back:hover {
-            color: var(--teal);
+        /* Override container constraints for full-width */
+        .container .about-page-wrapper {
+            max-width: none;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
         }
 
         /* Main document container */
@@ -83,6 +62,13 @@ permalink: /about/
                 0 20px 60px rgba(0,0,0,0.5),
                 inset 0 1px 0 rgba(255,255,255,0.1);
             position: relative;
+        }
+
+        [data-theme="dark"] .dossier {
+            background: #3a3a2a;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.8),
+                inset 0 1px 0 rgba(255,255,255,0.05);
         }
 
         .dossier::before {
@@ -616,8 +602,9 @@ permalink: /about/
 
         /* Responsive */
         @media (max-width: 768px) {
-            body {
-                padding: 1rem;
+            .about-page-wrapper {
+                margin: -2rem -1.5rem;
+                padding: 1rem 1.5rem;
             }
 
             .doc-header,
@@ -648,10 +635,6 @@ permalink: /about/
                 font-size: 0.7rem;
             }
 
-            .nav-back {
-                position: static;
-                margin-bottom: 1rem;
-            }
 
             /* Fix circled text on mobile - prevent breaking across lines */
             .circled {
@@ -692,11 +675,8 @@ permalink: /about/
             }
         }
     </style>
-</head>
-<body>
 
-    <a href="{{ '/' | relative_url }}" class="nav-back">← Back to Home</a>
-
+<div class="about-page-wrapper">
     <div class="document-wrapper">
         <div class="dossier">
             <div class="classification">DECLASSIFIED</div>
@@ -939,6 +919,4 @@ permalink: /about/
             </div>
         </div>
     </div>
-
-</body>
-</html>
+</div>
