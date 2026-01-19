@@ -397,8 +397,17 @@ hide_breadcrumbs: true
             transform: rotate(2deg);
             padding: 0.5rem;
             border-left: 2px solid var(--orange);
+            background: var(--paper);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 2px;
+            z-index: 10; /* Bring to front */
             opacity: 0;
             transition: opacity 0.3s;
+        }
+        
+        [data-theme="dark"] .margin-note {
+            background: var(--paper-dark);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
         
         /* Ensure margin notes stay within pages container */
