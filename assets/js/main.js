@@ -18,7 +18,6 @@
     setupReadingTime();
     setupShareButtons();
     setupLazyLoading();
-    setupRabbitChaser();
   }
 
   /**
@@ -288,80 +287,6 @@
 
       observer.observe(commentsSection);
     }
-  }
-
-  /**
-   * Animated rabbit that follows the pointer and "crashes" on contact
-   */
-  function setupRabbitChaser() {
-    // Don't initialize on mobile devices
-    if (window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0) {
-      return;
-    }
-
-    const chaser = document.createElement('div');
-    chaser.className = 'pikachu-chaser';
-    chaser.setAttribute('aria-hidden', 'true');
-    const sprite = document.createElement('div');
-    sprite.className = 'pikachu-sprite';
-    const stars = document.createElement('div');
-    stars.className = 'chaser-stars';
-    chaser.appendChild(sprite);
-    chaser.appendChild(stars);
-    document.body.appendChild(chaser);
-
-    let x = window.innerWidth / 2;
-    let y = window.innerHeight / 2;
-    let targetX = x;
-    let targetY = y;
-    let crashed = false;
-    let crashTimeout = null;
-
-    function onMove(e) {
-      targetX = e.clientX;
-      targetY = e.clientY;
-    }
-
-    window.addEventListener('mousemove', onMove);
-
-    function animate() {
-      const dx = targetX - x;
-      const dy = targetY - y;
-      const dist = Math.hypot(dx, dy);
-      
-      // Get actual dimensions to center the chaser
-      const chaserWidth = chaser.offsetWidth || 64;
-      const chaserHeight = chaser.offsetHeight || 64;
-
-      if (!crashed) {
-        if (dist > 1) {
-          const step = Math.min(3, dist);
-          x += (dx / dist) * step;
-          y += (dy / dist) * step;
-        }
-
-        if (dist < 10) {
-          crashed = true;
-          chaser.classList.add('is-crashed');
-          if (crashTimeout) clearTimeout(crashTimeout);
-          crashTimeout = setTimeout(() => {
-            crashed = false;
-            chaser.classList.remove('is-crashed');
-          }, 600);
-        }
-      }
-
-      // Center the chaser on the cursor
-      chaser.style.transform = `translate(${x - chaserWidth / 2}px, ${y - chaserHeight / 2}px)`;
-      requestAnimationFrame(animate);
-    }
-
-    // Set initial position
-    const chaserWidth = chaser.offsetWidth || 64;
-    const chaserHeight = chaser.offsetHeight || 64;
-    chaser.style.transform = `translate(${x - chaserWidth / 2}px, ${y - chaserHeight / 2}px)`;
-    
-    requestAnimationFrame(animate);
   }
 
   /**
