@@ -100,6 +100,7 @@ hide_breadcrumbs: true
             box-shadow: 
                 2px 2px 8px rgba(0,0,0,0.2),
                 0 0 0 1px rgba(0,0,0,0.1);
+            overflow: visible;
         }
 
         /* Paper texture overlay */
@@ -236,8 +237,10 @@ hide_breadcrumbs: true
 
         /* Main content area */
         .doc-content {
-            padding: 3rem 4rem;
+            padding: 3rem 4rem 3rem 4rem;
+            padding-right: calc(4rem + 200px); /* Extra space for margin notes */
             position: relative;
+            overflow: visible;
         }
 
         /* Entry blocks */
@@ -340,7 +343,7 @@ hide_breadcrumbs: true
         /* Margin notes */
         .margin-note {
             position: absolute;
-            right: -180px;
+            right: 20px; /* Position from right edge of doc-content */
             width: 160px;
             font-family: 'Caveat', cursive;
             font-size: 1rem;
@@ -350,6 +353,15 @@ hide_breadcrumbs: true
             border-left: 2px solid var(--orange);
             opacity: 0;
             transition: opacity 0.3s;
+        }
+        
+        /* Ensure margin notes stay within pages container */
+        .pages {
+            overflow: visible;
+        }
+        
+        .dossier {
+            overflow: visible;
         }
 
         .entry:hover .margin-note {
@@ -607,6 +619,10 @@ hide_breadcrumbs: true
             .doc-footer {
                 padding-left: 2rem;
                 padding-right: 2rem;
+            }
+            
+            .doc-content {
+                padding-right: 2rem; /* Reset extra padding on mobile */
             }
 
             .orphans {
