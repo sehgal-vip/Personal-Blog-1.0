@@ -14,23 +14,23 @@
     // Wave parameters
     waveCount: 3,              // Number of overlapping wave layers
     baseFrequency: 0.02,        // Base wave frequency
-    amplitude: 15,              // Wave amplitude (distortion strength)
+    amplitude: 20,              // Wave amplitude (distortion strength)
     speed: 0.001,               // Wave animation speed
-    cursorInfluence: 0.3,      // How much cursor affects waves (0-1)
-    cursorRadius: 150,          // Radius of cursor influence
+    cursorInfluence: 0.5,      // How much cursor affects waves (0-1)
+    cursorRadius: 200,          // Radius of cursor influence
     
     // Performance
     throttleDelay: 16,          // ~60fps throttling
     pixelRatio: Math.min(window.devicePixelRatio || 1, 2), // Limit for performance
     
     // Visual
-    opacity: 0.08,              // Texture opacity (very subtle)
+    opacity: 0.15,              // Texture opacity (subtle but visible)
     textureScale: 0.5,          // Texture detail level
     
     // Mobile
     reduceOnMobile: true,       // Reduce intensity on mobile
     mobileWaveCount: 2,         // Fewer waves on mobile
-    mobileOpacity: 0.05,        // Lower opacity on mobile
+    mobileOpacity: 0.1,         // Lower opacity on mobile
   };
 
   class ChaosBackground {
