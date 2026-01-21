@@ -1874,6 +1874,11 @@ strong, b {
   }
 }
 
+.filter-select[multiple] {
+  height: auto;
+  min-height: 2.75rem;
+}
+
 @media (max-width: 600px) {
   .filter-select {
     min-width: 120px;
