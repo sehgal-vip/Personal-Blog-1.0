@@ -51,6 +51,7 @@
       this.isVisible = true;
       this.animationFrame = null;
       this.throttleTimer = null;
+      this.texturePattern = null;
 
       // Adjust config for mobile
       if (this.isMobile && CONFIG.reduceOnMobile) {
@@ -68,6 +69,7 @@
     init() {
       this.createCanvas();
       this.createWaves();
+      this.createTexturePattern();
       this.setupEventListeners();
       this.animate();
     }
@@ -208,99 +210,106 @@
       // Clear canvas
       this.ctx.clearRect(0, 0, width, height);
 
-      // Draw wave interference pattern directly (more efficient)
+      // Draw wave interference pattern
       this.ctx.save();
-      this.ctx.globalCompositeOperation = 'multiply';
+      this.ctx.globalCompositeOperation = 'screen'; // Lighter blend mode for subtlety
       
-      // Draw multiple wave layers
+      // Draw multiple wave layers creating interference patterns
       for (let i = 0; i < this.waves.length; i++) {
         const wave = this.waves[i];
         this.drawWaveLayer(wave, width, height, i);
       }
       
       this.ctx.restore();
+      
+      // Draw subtle texture overlay
+      this.drawTextureOverlay(width, height);
     }
 
     /**
-     * Draw a single wave layer
+     * Draw a single wave layer with distortion
      */
     drawWaveLayer(wave, width, height, layerIndex) {
-      const gradient = this.ctx.createLinearGradient(0, 0, width, height);
-      const steps = 20;
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       
-      // Create gradient based on wave pattern
-      for (let i = 0; i <= steps; i++) {
-        const t = i / steps;
-        const x = width * t;
-        const y = height * t;
+      // Create radial gradient from cursor position
+      const gradient = this.ctx.createRadialGradient(
+        this.mouseX, this.mouseY, 0,
+        this.mouseX, this.mouseY, CONFIG.cursorRadius * 2
+      );
+      
+      // Calculate wave interference at different distances
+      for (let i = 0; i <= 10; i++) {
+        const t = i / 10;
+        const distance = t * CONFIG.cursorRadius * 2;
         
-        // Calculate wave value at this point
-        const waveX = x * Math.cos(wave.direction) + y * Math.sin(wave.direction);
-        const baseWave = Math.sin(waveX * wave.frequency + this.time * wave.speed + wave.phase);
+        // Wave pattern based on distance and angle
+        const angle = Math.atan2(0, distance) + wave.direction;
+        const waveX = distance * Math.cos(angle);
+        const waveValue = Math.sin(waveX * wave.frequency + this.time * wave.speed + wave.phase);
         
-        // Add cursor influence
-        const dx = x - this.mouseX;
-        const dy = y - this.mouseY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const cursorInfluence = Math.max(0, 1 - distance / CONFIG.cursorRadius);
-        const cursorWave = cursorInfluence * Math.sin(distance * 0.1 - this.time * 0.005) * CONFIG.cursorInfluence;
+        // Cursor influence creates distortion
+        const cursorInfluence = Math.max(0, 1 - t);
+        const cursorWave = cursorInfluence * Math.sin(distance * 0.05 - this.time * 0.003) * CONFIG.cursorInfluence;
         
-        const waveValue = (baseWave + cursorWave) * 0.5 + 0.5; // Normalize to 0-1
+        const combinedWave = (waveValue + cursorWave) * 0.5 + 0.5;
+        const opacity = combinedWave * 0.08 + 0.02; // Very subtle
         
-        // Create subtle color variation
-        const opacity = waveValue * 0.15 + 0.05; // Very subtle
-        const hue = (layerIndex * 60 + waveValue * 30) % 360;
+        // Use theme colors with slight hue variation
+        const hue = (layerIndex * 40 + combinedWave * 20) % 360;
+        const saturation = isDark ? 25 : 35;
+        const lightness = isDark ? 45 : 55;
         
-        // Use theme-aware colors
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const color = isDark 
-          ? `hsla(${hue}, 30%, 50%, ${opacity})`
-          : `hsla(${hue}, 40%, 60%, ${opacity})`;
-        
-        gradient.addColorStop(t, color);
+        gradient.addColorStop(t, `hsla(${hue}, ${saturation}%, ${lightness}%, ${opacity})`);
       }
       
       // Draw wave pattern
       this.ctx.fillStyle = gradient;
       this.ctx.fillRect(0, 0, width, height);
-      
-      // Add noise texture overlay
-      this.drawNoiseTexture(width, height, layerIndex);
     }
 
     /**
-     * Draw subtle noise texture (optimized)
+     * Draw subtle texture overlay that distorts with waves
      */
-    drawNoiseTexture(width, height, layerIndex) {
-      // Use canvas pattern for better performance
-      const patternSize = 4;
+    drawTextureOverlay(width, height) {
+      // Create noise pattern once and reuse
+      if (!this.texturePattern) {
+        this.createTexturePattern();
+      }
+      
+      // Apply wave distortion to pattern position
+      const centerDistortion = this.getWaveDistortion(width / 2, height / 2, this.time);
+      
+      this.ctx.save();
+      this.ctx.globalAlpha = 0.04;
+      this.ctx.translate(centerDistortion.x * 0.2, centerDistortion.y * 0.2);
+      this.ctx.fillStyle = this.texturePattern;
+      this.ctx.fillRect(0, 0, width, height);
+      this.ctx.restore();
+    }
+
+    /**
+     * Create reusable texture pattern
+     */
+    createTexturePattern() {
+      const patternSize = 8;
       const patternCanvas = document.createElement('canvas');
       patternCanvas.width = patternSize;
       patternCanvas.height = patternSize;
       const patternCtx = patternCanvas.getContext('2d');
       
-      // Create subtle noise pattern
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const color = isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.03)';
+      const color = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
       
-      // Draw sparse noise dots
-      for (let i = 0; i < 2; i++) {
+      // Create sparse noise pattern
+      for (let i = 0; i < 4; i++) {
         const x = Math.random() * patternSize;
         const y = Math.random() * patternSize;
         patternCtx.fillStyle = color;
-        patternCtx.fillRect(x, y, 1, 1);
+        patternCtx.fillRect(Math.floor(x), Math.floor(y), 1, 1);
       }
       
-      // Create pattern
-      const pattern = this.ctx.createPattern(patternCanvas, 'repeat');
-      
-      // Apply wave distortion by offsetting pattern
-      const distortion = this.getWaveDistortion(width / 2, height / 2, this.time);
-      this.ctx.save();
-      this.ctx.translate(distortion.x * 0.1, distortion.y * 0.1);
-      this.ctx.fillStyle = pattern;
-      this.ctx.fillRect(0, 0, width, height);
-      this.ctx.restore();
+      this.texturePattern = this.ctx.createPattern(patternCanvas, 'repeat');
     }
 
     /**
