@@ -35,10 +35,26 @@ hide_breadcrumbs: true
             padding: 2rem clamp(1.5rem, 4vw, 4rem) 4rem;
             background: var(--bg-color);
             min-height: calc(100vh - var(--header-height) - 4rem);
+            position: relative;
+            /* Allow background gradients and chaos effects to show through */
+            background: transparent;
         }
 
         [data-theme="dark"] .about-page-wrapper {
-            background: var(--bg-color);
+            background: transparent;
+        }
+        
+        /* Ensure dossier and pages have proper backgrounds */
+        .dossier {
+            background: #4a4a3a;
+        }
+        
+        [data-theme="dark"] .dossier {
+            background: #3a3a2a;
+        }
+        
+        .pages {
+            background: var(--paper);
         }
 
         /* Main document container */
