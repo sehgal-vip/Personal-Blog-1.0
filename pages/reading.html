@@ -8,8 +8,10 @@ permalink: /reading/
 <div class="reading-list">
   <!-- Papers Section -->
   {% if site.data.reading_papers.size > 0 %}
-  {% assign papers_years = site.data.reading_papers | map: "year" | uniq | sort | reverse %}
-  {% assign papers_authors = site.data.reading_papers | map: "author" | uniq | sort %}
+  {% assign papers_by_year_temp = site.data.reading_papers | group_by: "year" %}
+  {% assign papers_years = papers_by_year_temp | map: "name" | sort | reverse %}
+  {% assign papers_by_author_temp = site.data.reading_papers | group_by: "author" %}
+  {% assign papers_authors = papers_by_author_temp | map: "name" | sort %}
   <section class="collapsible-section" data-section="papers">
     <h2 class="section-title">
       <span class="section-icon">📄</span>
@@ -81,8 +83,10 @@ permalink: /reading/
 
   <!-- Books Section -->
   {% if site.data.reading_books.size > 0 %}
-  {% assign books_years = site.data.reading_books | map: "year" | uniq | sort | reverse %}
-  {% assign books_authors = site.data.reading_books | map: "author" | uniq | sort %}
+  {% assign books_by_year_temp = site.data.reading_books | group_by: "year" %}
+  {% assign books_years = books_by_year_temp | map: "name" | sort | reverse %}
+  {% assign books_by_author_temp = site.data.reading_books | group_by: "author" %}
+  {% assign books_authors = books_by_author_temp | map: "name" | sort %}
   <section class="collapsible-section" data-section="books">
     <h2 class="section-title">
       <span class="section-icon">📚</span>
@@ -154,8 +158,10 @@ permalink: /reading/
 
   <!-- Articles Section -->
   {% if site.data.reading_articles.size > 0 %}
-  {% assign articles_years = site.data.reading_articles | map: "year" | uniq | sort | reverse %}
-  {% assign articles_authors = site.data.reading_articles | map: "author" | uniq | sort %}
+  {% assign articles_by_year_temp = site.data.reading_articles | group_by: "year" %}
+  {% assign articles_years = articles_by_year_temp | map: "name" | sort | reverse %}
+  {% assign articles_by_author_temp = site.data.reading_articles | group_by: "author" %}
+  {% assign articles_authors = articles_by_author_temp | map: "name" | sort %}
   <section class="collapsible-section" data-section="articles">
     <h2 class="section-title">
       <span class="section-icon">📰</span>
@@ -227,8 +233,10 @@ permalink: /reading/
 
   <!-- Others Section -->
   {% if site.data.reading_others.size > 0 %}
-  {% assign others_years = site.data.reading_others | map: "year" | uniq | sort | reverse %}
-  {% assign others_authors = site.data.reading_others | map: "author" | uniq | sort %}
+  {% assign others_by_year_temp = site.data.reading_others | group_by: "year" %}
+  {% assign others_years = others_by_year_temp | map: "name" | sort | reverse %}
+  {% assign others_by_author_temp = site.data.reading_others | group_by: "author" %}
+  {% assign others_authors = others_by_author_temp | map: "name" | sort %}
   <section class="collapsible-section" data-section="others">
     <h2 class="section-title">
       <span class="section-icon">🔗</span>
