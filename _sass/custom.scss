@@ -1900,6 +1900,10 @@ strong, b {
     border-color: var(--color-primary);
     background: var(--bg-secondary);
   }
+  
+  &[data-filter="author"] {
+    min-width: 200px;
+  }
 }
 
 .filter-label {
@@ -1943,6 +1947,11 @@ strong, b {
   
   &.open {
     display: block;
+  }
+  
+  &.filter-author {
+    min-width: 200px;
+    max-width: 350px;
   }
 }
 
@@ -2075,7 +2084,7 @@ strong, b {
   // Column widths
   th:nth-child(1),
   td:nth-child(1) {
-    width: 35%;
+    width: 30%;
   }
   
   th:nth-child(2),
@@ -2085,7 +2094,12 @@ strong, b {
   
   th:nth-child(3),
   td:nth-child(3) {
-    width: 45%;
+    width: 10%;
+  }
+  
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 40%;
   }
 }
 
