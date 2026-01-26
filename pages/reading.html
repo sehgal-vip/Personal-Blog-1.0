@@ -451,28 +451,28 @@ document.addEventListener('DOMContentLoaded', function() {
     sections.forEach(section => {
       const yearDropdown = section.querySelector('.filter-year');
       const authorDropdown = section.querySelector('.filter-author');
-      const accordions = section.querySelectorAll('.year-accordion');
+      const table = section.querySelector('.data-table');
+      
+      if (!table) return;
       
       const selectedYears = yearDropdown ? getSelectedValues(yearDropdown) : ['all'];
       const selectedAuthors = authorDropdown ? getSelectedValues(authorDropdown) : ['all'];
       
-      yearGroups.forEach(group => {
-        const rows = group.querySelectorAll('tbody tr');
-        let visibleRows = 0;
-        
-        rows.forEach(row => {
-          const rowYear = row.getAttribute('data-year');
-          const rowAuthor = row.getAttribute('data-author');
-          const matchYear = selectedYears.includes('all') || selectedYears.includes(rowYear);
-          const matchAuthor = selectedAuthors.includes('all') || selectedAuthors.includes(rowAuthor);
-          const shouldShow = matchYear && matchAuthor;
-          row.style.display = shouldShow ? '' : 'none';
-          if (shouldShow) visibleRows++;
-        });
-        
-        // Hide entire year group if no rows match
-        group.style.display = visibleRows > 0 ? '' : 'none';
+      const rows = table.querySelectorAll('tbody tr');
+      let visibleRows = 0;
+      
+      rows.forEach(row => {
+        const rowYear = row.getAttribute('data-year');
+        const rowAuthor = row.getAttribute('data-author');
+        const matchYear = selectedYears.includes('all') || selectedYears.includes(rowYear);
+        const matchAuthor = selectedAuthors.includes('all') || selectedAuthors.includes(rowAuthor);
+        const shouldShow = matchYear && matchAuthor;
+        row.style.display = shouldShow ? '' : 'none';
+        if (shouldShow) visibleRows++;
       });
+      
+      // Hide table if no rows match
+      table.style.display = visibleRows > 0 ? '' : 'none';
     });
   };
   
