@@ -606,6 +606,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Store sort state for this section
     sortState[section] = sortType;
     
+    // Store current display states before sorting
+    const displayStatesMap = new Map();
+    rows.forEach(row => {
+      displayStatesMap.set(row, row.style.display);
+    });
+    
     // Sort rows based on selected option
     rows.sort((a, b) => {
       if (sortType === 'year') {
@@ -630,22 +636,20 @@ document.addEventListener('DOMContentLoaded', function() {
       return 0;
     });
     
-    // Store current display states before reordering (in original order)
-    const originalRows = Array.from(tbody.querySelectorAll('tr'));
-    const displayStatesMap = new Map();
-    originalRows.forEach(row => {
-      displayStatesMap.set(row, row.style.display);
-    });
+    // Create a document fragment to hold sorted rows temporarily
+    const fragment = document.createDocumentFragment();
     
-    // Clear tbody and re-append rows in sorted order
-    // This ensures the DOM order matches the sorted array
-    tbody.innerHTML = '';
+    // Add sorted rows to fragment with preserved display states
     rows.forEach(row => {
-      // Restore display state from map
       const savedDisplay = displayStatesMap.get(row) || '';
       row.style.display = savedDisplay;
-      tbody.appendChild(row);
+      fragment.appendChild(row);
     });
+    
+    // Clear tbody and append the sorted fragment
+    // This ensures the DOM order matches the sorted array
+    tbody.innerHTML = '';
+    tbody.appendChild(fragment);
     
     console.log('Sort applied, rows reordered');
     
@@ -658,11 +662,18 @@ document.addEventListener('DOMContentLoaded', function() {
   applyFilters();
   
   // Add Apply button click handlers
-  document.querySelectorAll('.sort-apply-btn').forEach(btn => {
+  const applyButtons = document.querySelectorAll('.sort-apply-btn');
+  console.log('Found sort apply buttons:', applyButtons.length);
+  
+  applyButtons.forEach((btn, index) => {
+    const section = btn.getAttribute('data-section');
+    console.log(`Attaching handler to button ${index} for section: ${section}`);
+    
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
       e.preventDefault();
       const section = this.getAttribute('data-section');
+      console.log('Apply button clicked for section:', section);
       
       // Apply the sort
       applySort(section);
