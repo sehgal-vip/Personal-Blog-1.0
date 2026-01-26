@@ -60,6 +60,28 @@ permalink: /reading/
           {% endfor %}
         </div>
       </div>
+      <div class="filter-group">
+        <button class="filter-toggle sort-toggle" data-section="papers">
+          <span class="filter-label">Sort</span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown sort-dropdown" data-section="papers">
+          <label class="filter-option">
+            <input type="radio" name="sort-papers" value="year" checked>
+            <span>Year</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort-papers" value="title-asc">
+            <span>Title (A-Z)</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort-papers" value="title-desc">
+            <span>Title (Z-A)</span>
+          </label>
+        </div>
+      </div>
     </div>
     
     {% assign papers_sorted = site.data.reading_papers | sort: "year" | reverse %}
@@ -144,6 +166,28 @@ permalink: /reading/
             <span>{{ a }}</span>
           </label>
           {% endfor %}
+        </div>
+      </div>
+      <div class="filter-group">
+        <button class="filter-toggle sort-toggle" data-section="books">
+          <span class="filter-label">Sort</span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown sort-dropdown" data-section="books">
+          <label class="filter-option">
+            <input type="radio" name="sort-books" value="year" checked>
+            <span>Year</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort-books" value="title-asc">
+            <span>Title (A-Z)</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort-books" value="title-desc">
+            <span>Title (Z-A)</span>
+          </label>
         </div>
       </div>
     </div>
@@ -232,6 +276,28 @@ permalink: /reading/
           {% endfor %}
         </div>
       </div>
+      <div class="filter-group">
+        <button class="filter-toggle sort-toggle" data-section="articles">
+          <span class="filter-label">Sort</span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown sort-dropdown" data-section="articles">
+          <label class="filter-option">
+            <input type="radio" name="sort-articles" value="year" checked>
+            <span>Year</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort-articles" value="title-asc">
+            <span>Title (A-Z)</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort-articles" value="title-desc">
+            <span>Title (Z-A)</span>
+          </label>
+        </div>
+      </div>
     </div>
     
     {% assign articles_sorted = site.data.reading_articles | sort: "year" | reverse %}
@@ -316,6 +382,28 @@ permalink: /reading/
             <span>{{ a }}</span>
           </label>
           {% endfor %}
+        </div>
+      </div>
+      <div class="filter-group">
+        <button class="filter-toggle sort-toggle" data-section="others">
+          <span class="filter-label">Sort</span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown sort-dropdown" data-section="others">
+          <label class="filter-option">
+            <input type="radio" name="sort-others" value="year" checked>
+            <span>Year</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort-others" value="title-asc">
+            <span>Title (A-Z)</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort-others" value="title-desc">
+            <span>Title (Z-A)</span>
+          </label>
         </div>
       </div>
     </div>
@@ -478,5 +566,50 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initial filter application
   applyFilters();
+  
+  // Sorting functionality
+  const sortDropdowns = document.querySelectorAll('.sort-dropdown');
+  
+  sortDropdowns.forEach(dropdown => {
+    const radios = dropdown.querySelectorAll('input[type="radio"]');
+    const section = dropdown.getAttribute('data-section');
+    const table = document.querySelector(`.collapsible-section[data-section="${section}"] .data-table`);
+    
+    if (!table) return;
+    
+    radios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        if (!this.checked) return;
+        
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const sortType = this.value;
+        
+        // Sort rows
+        rows.sort((a, b) => {
+          if (sortType === 'year') {
+            const yearA = parseInt(a.getAttribute('data-year')) || 0;
+            const yearB = parseInt(b.getAttribute('data-year')) || 0;
+            return yearB - yearA; // Descending (newest first)
+          } else if (sortType === 'title-asc') {
+            const titleA = a.querySelector('.title-cell').textContent.trim().toLowerCase();
+            const titleB = b.querySelector('.title-cell').textContent.trim().toLowerCase();
+            return titleA.localeCompare(titleB);
+          } else if (sortType === 'title-desc') {
+            const titleA = a.querySelector('.title-cell').textContent.trim().toLowerCase();
+            const titleB = b.querySelector('.title-cell').textContent.trim().toLowerCase();
+            return titleB.localeCompare(titleA);
+          }
+          return 0;
+        });
+        
+        // Reorder rows in DOM
+        rows.forEach(row => tbody.appendChild(row));
+        
+        // Reapply filters after sorting
+        applyFilters();
+      });
+    });
+  });
 });
 </script>
