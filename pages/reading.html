@@ -616,14 +616,21 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.sort-apply-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
+      e.preventDefault();
       const section = this.getAttribute('data-section');
+      
+      // Apply the sort
       applySort(section);
       
       // Close the dropdown
       const dropdown = this.closest('.sort-dropdown');
-      const toggle = dropdown.previousElementSibling;
-      dropdown.classList.remove('open');
-      toggle.classList.remove('active');
+      if (dropdown) {
+        dropdown.classList.remove('open');
+        const toggle = dropdown.previousElementSibling;
+        if (toggle && toggle.classList.contains('filter-toggle')) {
+          toggle.classList.remove('active');
+        }
+      }
     });
   });
 });
