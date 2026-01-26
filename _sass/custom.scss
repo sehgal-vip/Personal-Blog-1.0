@@ -882,12 +882,8 @@ strong, b {
 
 .intro-content {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0;
   text-align: left;
-  
-  @media (max-width: 767px) {
-    text-align: left;
-  }
 }
 
 .intro-subheading {
