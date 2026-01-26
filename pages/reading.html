@@ -62,39 +62,33 @@ permalink: /reading/
       </div>
     </div>
     
-    {% assign papers_by_year = site.data.reading_papers | group_by: "year" | sort: "name" | reverse %}
-    {% for year_group in papers_by_year %}
-    <div class="year-group">
-      <div class="year-content">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Year</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in year_group.items %}
-            <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
-              <td class="title-cell">
-                {% if item.url and item.url != "" %}
-                <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
-                {% else %}
-                {{ item.title }}
-                {% endif %}
-              </td>
-              <td class="author-cell">{{ item.author }}</td>
-              <td class="year-cell">{{ item.year }}</td>
-              <td class="desc-cell">{{ item.description }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    {% endfor %}
+    {% assign papers_sorted = site.data.reading_papers | sort: "year" | reverse %}
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Year</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in papers_sorted %}
+        <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
+          <td class="title-cell">
+            {% if item.url and item.url != "" %}
+            <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+            {% else %}
+            {{ item.title }}
+            {% endif %}
+          </td>
+          <td class="author-cell">{{ item.author }}</td>
+          <td class="year-cell">{{ item.year }}</td>
+          <td class="desc-cell">{{ item.description }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </section>
   {% endif %}
 
@@ -154,45 +148,33 @@ permalink: /reading/
       </div>
     </div>
     
-    {% assign books_by_year = site.data.reading_books | group_by: "year" | sort: "name" | reverse %}
-    {% for year_group in books_by_year %}
-    <div class="year-accordion">
-      <button class="year-toggle" aria-expanded="true" data-year="{{ year_group.name }}">
-        <span class="year-label">{{ year_group.name }}</span>
-        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </button>
-      <div class="year-content">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Year</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in year_group.items %}
-            <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
-              <td class="title-cell">
-                {% if item.url and item.url != "" %}
-                <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
-                {% else %}
-                {{ item.title }}
-                {% endif %}
-              </td>
-              <td class="author-cell">{{ item.author }}</td>
-              <td class="year-cell">{{ item.year }}</td>
-              <td class="desc-cell">{{ item.description }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    {% endfor %}
+    {% assign books_sorted = site.data.reading_books | sort: "year" | reverse %}
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Year</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in books_sorted %}
+        <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
+          <td class="title-cell">
+            {% if item.url and item.url != "" %}
+            <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+            {% else %}
+            {{ item.title }}
+            {% endif %}
+          </td>
+          <td class="author-cell">{{ item.author }}</td>
+          <td class="year-cell">{{ item.year }}</td>
+          <td class="desc-cell">{{ item.description }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </section>
   {% endif %}
 
@@ -252,45 +234,33 @@ permalink: /reading/
       </div>
     </div>
     
-    {% assign articles_by_year = site.data.reading_articles | group_by: "year" | sort: "name" | reverse %}
-    {% for year_group in articles_by_year %}
-    <div class="year-accordion">
-      <button class="year-toggle" aria-expanded="true" data-year="{{ year_group.name }}">
-        <span class="year-label">{{ year_group.name }}</span>
-        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </button>
-      <div class="year-content">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Year</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in year_group.items %}
-            <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
-              <td class="title-cell">
-                {% if item.url and item.url != "" %}
-                <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
-                {% else %}
-                {{ item.title }}
-                {% endif %}
-              </td>
-              <td class="author-cell">{{ item.author }}</td>
-              <td class="year-cell">{{ item.year }}</td>
-              <td class="desc-cell">{{ item.description }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    {% endfor %}
+    {% assign articles_sorted = site.data.reading_articles | sort: "year" | reverse %}
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Year</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in articles_sorted %}
+        <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
+          <td class="title-cell">
+            {% if item.url and item.url != "" %}
+            <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+            {% else %}
+            {{ item.title }}
+            {% endif %}
+          </td>
+          <td class="author-cell">{{ item.author }}</td>
+          <td class="year-cell">{{ item.year }}</td>
+          <td class="desc-cell">{{ item.description }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </section>
   {% endif %}
 
@@ -350,62 +320,39 @@ permalink: /reading/
       </div>
     </div>
     
-    {% assign others_by_year = site.data.reading_others | group_by: "year" | sort: "name" | reverse %}
-    {% for year_group in others_by_year %}
-    <div class="year-accordion">
-      <button class="year-toggle" aria-expanded="true" data-year="{{ year_group.name }}">
-        <span class="year-label">{{ year_group.name }}</span>
-        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </button>
-      <div class="year-content">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Year</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in year_group.items %}
-            <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
-              <td class="title-cell">
-                {% if item.url and item.url != "" %}
-                <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
-                {% else %}
-                {{ item.title }}
-                {% endif %}
-              </td>
-              <td class="author-cell">{{ item.author }}</td>
-              <td class="year-cell">{{ item.year }}</td>
-              <td class="desc-cell">{{ item.description }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    {% endfor %}
+    {% assign others_sorted = site.data.reading_others | sort: "year" | reverse %}
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Year</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in others_sorted %}
+        <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
+          <td class="title-cell">
+            {% if item.url and item.url != "" %}
+            <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+            {% else %}
+            {{ item.title }}
+            {% endif %}
+          </td>
+          <td class="author-cell">{{ item.author }}</td>
+          <td class="year-cell">{{ item.year }}</td>
+          <td class="desc-cell">{{ item.description }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </section>
   {% endif %}
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Collapse/expand year accordions
-  document.querySelectorAll('.year-toggle').forEach(function(button) {
-    button.addEventListener('click', function() {
-      const content = this.nextElementSibling;
-      const isExpanded = this.getAttribute('aria-expanded') === 'true';
-      
-      this.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('collapsed', isExpanded);
-    });
-  });
-
   // Collapsible filter dropdowns
   const filterToggles = document.querySelectorAll('.filter-toggle');
   const filterDropdowns = document.querySelectorAll('.filter-dropdown');
