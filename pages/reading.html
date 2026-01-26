@@ -578,14 +578,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdown = document.querySelector(`.sort-dropdown[data-section="${section}"]`);
     const table = document.querySelector(`.collapsible-section[data-section="${section}"] .data-table`);
     
-    if (!dropdown || !table) return;
+    if (!dropdown || !table) {
+      console.error('Sort: Dropdown or table not found', { dropdown, table, section });
+      return;
+    }
     
     const selectedRadio = dropdown.querySelector('input[type="radio"]:checked');
-    if (!selectedRadio) return;
+    if (!selectedRadio) {
+      console.error('Sort: No radio button selected');
+      return;
+    }
     
     const tbody = table.querySelector('tbody');
+    if (!tbody) {
+      console.error('Sort: tbody not found');
+      return;
+    }
+    
+    // Get ALL rows, including hidden ones
     const rows = Array.from(tbody.querySelectorAll('tr'));
+    if (rows.length === 0) {
+      console.error('Sort: No rows found');
+      return;
+    }
+    
     const sortType = selectedRadio.value;
+    console.log('Sorting:', { section, sortType, rowCount: rows.length });
     
     // Sort rows
     rows.sort((a, b) => {
@@ -594,21 +612,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const yearB = parseInt(b.getAttribute('data-year')) || 0;
         return yearB - yearA; // Descending (newest first)
       } else if (sortType === 'title-asc') {
-        const titleA = a.querySelector('.title-cell').textContent.trim().toLowerCase();
-        const titleB = b.querySelector('.title-cell').textContent.trim().toLowerCase();
+        const titleCellA = a.querySelector('.title-cell');
+        const titleCellB = b.querySelector('.title-cell');
+        if (!titleCellA || !titleCellB) return 0;
+        const titleA = titleCellA.textContent.trim().toLowerCase();
+        const titleB = titleCellB.textContent.trim().toLowerCase();
         return titleA.localeCompare(titleB);
       } else if (sortType === 'title-desc') {
-        const titleA = a.querySelector('.title-cell').textContent.trim().toLowerCase();
-        const titleB = b.querySelector('.title-cell').textContent.trim().toLowerCase();
+        const titleCellA = a.querySelector('.title-cell');
+        const titleCellB = b.querySelector('.title-cell');
+        if (!titleCellA || !titleCellB) return 0;
+        const titleA = titleCellA.textContent.trim().toLowerCase();
+        const titleB = titleCellB.textContent.trim().toLowerCase();
         return titleB.localeCompare(titleA);
       }
       return 0;
     });
     
-    // Reorder rows in DOM
+    // Reorder rows in DOM - append each row directly (moves them automatically)
     rows.forEach(row => tbody.appendChild(row));
     
-    // Reapply filters after sorting
+    // Reapply filters after sorting to maintain filter state
     applyFilters();
   };
   
