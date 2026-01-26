@@ -1891,6 +1891,13 @@ strong, b {
     border-color: var(--color-primary);
     box-shadow: 0 0 0 2px rgba(0, 217, 255, 0.15);
   }
+  
+  &[multiple] {
+    height: auto;
+    min-height: 2.75rem;
+    max-height: 200px;
+    overflow-y: auto;
+  }
 }
 
 
