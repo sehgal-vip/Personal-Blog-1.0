@@ -636,22 +636,26 @@ document.addEventListener('DOMContentLoaded', function() {
       return 0;
     });
     
-    // Create a document fragment to hold sorted rows temporarily
-    const fragment = document.createDocumentFragment();
+    // Remove all rows from tbody first (they'll be re-added in sorted order)
+    // We need to detach them before reordering
+    while (tbody.firstChild) {
+      tbody.removeChild(tbody.firstChild);
+    }
     
-    // Add sorted rows to fragment with preserved display states
+    // Now append rows in sorted order with preserved display states
     rows.forEach(row => {
       const savedDisplay = displayStatesMap.get(row) || '';
       row.style.display = savedDisplay;
-      fragment.appendChild(row);
+      tbody.appendChild(row);
     });
     
-    // Clear tbody and append the sorted fragment
-    // This ensures the DOM order matches the sorted array
-    tbody.innerHTML = '';
-    tbody.appendChild(fragment);
-    
-    console.log('Sort applied, rows reordered');
+    console.log('Sort applied, rows reordered. New order:', 
+      Array.from(tbody.querySelectorAll('tr')).map(r => {
+        const title = r.querySelector('.title-cell')?.textContent.trim() || 'no title';
+        const year = r.getAttribute('data-year') || 'no year';
+        return `${title} (${year})`;
+      })
+    );
     
     // Reapply filters to show/hide rows based on current filter state
     // This doesn't change the sort order, just visibility
