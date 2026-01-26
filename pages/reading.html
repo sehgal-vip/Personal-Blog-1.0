@@ -18,24 +18,48 @@ permalink: /reading/
       Papers
     </h2>
     <div class="section-filters" aria-label="Filter papers">
-      <label class="filter-group">
-        <span class="filter-label">Year</span>
-        <select class="filter-select filter-year" data-section="papers" multiple>
-          <option value="all">All</option>
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="year" data-section="papers">
+          <span class="filter-label">Year</span>
+          <span class="filter-selected-count"></span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown filter-year" data-section="papers">
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked>
+            <span>All</span>
+          </label>
           {% for y in papers_years %}
-          <option value="{{ y }}">{{ y }}</option>
+          <label class="filter-option">
+            <input type="checkbox" value="{{ y }}">
+            <span>{{ y }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
-      <label class="filter-group">
-        <span class="filter-label">Author</span>
-        <select class="filter-select filter-author" data-section="papers" multiple>
-          <option value="all">All</option>
+        </div>
+      </div>
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="author" data-section="papers">
+          <span class="filter-label">Author</span>
+          <span class="filter-selected-count"></span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown filter-author" data-section="papers">
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked>
+            <span>All</span>
+          </label>
           {% for a in papers_authors %}
-          <option value="{{ a }}">{{ a }}</option>
+          <label class="filter-option">
+            <input type="checkbox" value="{{ a }}">
+            <span>{{ a }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
+        </div>
+      </div>
     </div>
     
     {% assign papers_by_year = site.data.reading_papers | group_by: "year" | sort: "name" | reverse %}
@@ -90,24 +114,48 @@ permalink: /reading/
       Books
     </h2>
     <div class="section-filters" aria-label="Filter books">
-      <label class="filter-group">
-        <span class="filter-label">Year</span>
-        <select class="filter-select filter-year" data-section="books" multiple>
-          <option value="all">All</option>
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="year" data-section="books">
+          <span class="filter-label">Year</span>
+          <span class="filter-selected-count"></span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown filter-year" data-section="books">
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked>
+            <span>All</span>
+          </label>
           {% for y in books_years %}
-          <option value="{{ y }}">{{ y }}</option>
+          <label class="filter-option">
+            <input type="checkbox" value="{{ y }}">
+            <span>{{ y }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
-      <label class="filter-group">
-        <span class="filter-label">Author</span>
-        <select class="filter-select filter-author" data-section="books" multiple>
-          <option value="all">All</option>
+        </div>
+      </div>
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="author" data-section="books">
+          <span class="filter-label">Author</span>
+          <span class="filter-selected-count"></span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown filter-author" data-section="books">
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked>
+            <span>All</span>
+          </label>
           {% for a in books_authors %}
-          <option value="{{ a }}">{{ a }}</option>
+          <label class="filter-option">
+            <input type="checkbox" value="{{ a }}">
+            <span>{{ a }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
+        </div>
+      </div>
     </div>
     
     {% assign books_by_year = site.data.reading_books | group_by: "year" | sort: "name" | reverse %}
@@ -162,24 +210,48 @@ permalink: /reading/
       Articles
     </h2>
     <div class="section-filters" aria-label="Filter articles">
-      <label class="filter-group">
-        <span class="filter-label">Year</span>
-        <select class="filter-select filter-year" data-section="articles" multiple>
-          <option value="all">All</option>
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="year" data-section="articles">
+          <span class="filter-label">Year</span>
+          <span class="filter-selected-count"></span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown filter-year" data-section="articles">
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked>
+            <span>All</span>
+          </label>
           {% for y in articles_years %}
-          <option value="{{ y }}">{{ y }}</option>
+          <label class="filter-option">
+            <input type="checkbox" value="{{ y }}">
+            <span>{{ y }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
-      <label class="filter-group">
-        <span class="filter-label">Author</span>
-        <select class="filter-select filter-author" data-section="articles" multiple>
-          <option value="all">All</option>
+        </div>
+      </div>
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="author" data-section="articles">
+          <span class="filter-label">Author</span>
+          <span class="filter-selected-count"></span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown filter-author" data-section="articles">
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked>
+            <span>All</span>
+          </label>
           {% for a in articles_authors %}
-          <option value="{{ a }}">{{ a }}</option>
+          <label class="filter-option">
+            <input type="checkbox" value="{{ a }}">
+            <span>{{ a }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
+        </div>
+      </div>
     </div>
     
     {% assign articles_by_year = site.data.reading_articles | group_by: "year" | sort: "name" | reverse %}
@@ -234,24 +306,48 @@ permalink: /reading/
       Others
     </h2>
     <div class="section-filters" aria-label="Filter others">
-      <label class="filter-group">
-        <span class="filter-label">Year</span>
-        <select class="filter-select filter-year" data-section="others" multiple>
-          <option value="all">All</option>
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="year" data-section="others">
+          <span class="filter-label">Year</span>
+          <span class="filter-selected-count"></span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown filter-year" data-section="others">
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked>
+            <span>All</span>
+          </label>
           {% for y in others_years %}
-          <option value="{{ y }}">{{ y }}</option>
+          <label class="filter-option">
+            <input type="checkbox" value="{{ y }}">
+            <span>{{ y }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
-      <label class="filter-group">
-        <span class="filter-label">Author</span>
-        <select class="filter-select filter-author" data-section="others" multiple>
-          <option value="all">All</option>
+        </div>
+      </div>
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="author" data-section="others">
+          <span class="filter-label">Author</span>
+          <span class="filter-selected-count"></span>
+          <svg class="filter-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="filter-dropdown filter-author" data-section="others">
+          <label class="filter-option">
+            <input type="checkbox" value="all" checked>
+            <span>All</span>
+          </label>
           {% for a in others_authors %}
-          <option value="{{ a }}">{{ a }}</option>
+          <label class="filter-option">
+            <input type="checkbox" value="{{ a }}">
+            <span>{{ a }}</span>
+          </label>
           {% endfor %}
-        </select>
-      </label>
+        </div>
+      </div>
     </div>
     
     {% assign others_by_year = site.data.reading_others | group_by: "year" | sort: "name" | reverse %}
@@ -308,43 +404,113 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // Collapsible filter dropdowns
+  const filterToggles = document.querySelectorAll('.filter-toggle');
+  const filterDropdowns = document.querySelectorAll('.filter-dropdown');
+  
+  // Toggle dropdown visibility
+  filterToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const dropdown = this.nextElementSibling;
+      const isOpen = dropdown.classList.contains('open');
+      
+      // Close all other dropdowns
+      filterDropdowns.forEach(d => {
+        if (d !== dropdown) {
+          d.classList.remove('open');
+          d.previousElementSibling.classList.remove('active');
+        }
+      });
+      
+      // Toggle current dropdown
+      dropdown.classList.toggle('open', !isOpen);
+      this.classList.toggle('active', !isOpen);
+    });
+  });
+  
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.filter-group')) {
+      filterDropdowns.forEach(d => {
+        d.classList.remove('open');
+        d.previousElementSibling.classList.remove('active');
+      });
+    }
+  });
+  
+  // Get selected values from checkboxes
+  const getSelectedValues = (dropdown) => {
+    const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
+    return Array.from(checkboxes).map(cb => cb.value);
+  };
+  
+  // Update selected count display
+  const updateSelectedCount = (toggle, dropdown) => {
+    const selected = getSelectedValues(dropdown);
+    const count = selected.includes('all') ? 0 : selected.length;
+    const countSpan = toggle.querySelector('.filter-selected-count');
+    if (count > 0) {
+      countSpan.textContent = `(${count})`;
+    } else {
+      countSpan.textContent = '';
+    }
+  };
+  
+  // Handle checkbox changes
+  filterDropdowns.forEach(dropdown => {
+    const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
+    const toggle = dropdown.previousElementSibling;
+    
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const allCheckbox = dropdown.querySelector('input[type="checkbox"][value="all"]');
+        
+        if (this.value === 'all') {
+          // If "All" is checked, uncheck all others
+          if (this.checked) {
+            checkboxes.forEach(cb => {
+              if (cb !== this) cb.checked = false;
+            });
+          }
+        } else {
+          // If any other option is checked, uncheck "All"
+          if (this.checked) {
+            allCheckbox.checked = false;
+          }
+          
+          // If nothing is selected, check "All"
+          const hasSelection = Array.from(checkboxes).some(cb => cb !== allCheckbox && cb.checked);
+          if (!hasSelection) {
+            allCheckbox.checked = true;
+          }
+        }
+        
+        updateSelectedCount(toggle, dropdown);
+        applyFilters();
+      });
+    });
+    
+    // Initial count update
+    updateSelectedCount(toggle, dropdown);
+  });
+  
   // Filtering per section
   const sections = document.querySelectorAll('.collapsible-section');
   
-  const normalizeSelection = (select) => {
-    if (!select) return ['all'];
-    const options = Array.from(select.options);
-    const selected = options.filter(o => o.selected).map(o => o.value);
-    
-    // If "All" is selected with others, deselect others
-    if (selected.includes('all') && selected.length > 1) {
-      options.forEach(o => { o.selected = o.value === 'all'; });
-      return ['all'];
-    }
-    
-    // If nothing is selected, select "All"
-    if (selected.length === 0) {
-      const allOpt = options.find(o => o.value === 'all');
-      if (allOpt) allOpt.selected = true;
-      return ['all'];
-    }
-    
-    return selected;
-  };
-  
-  sections.forEach(function(section) {
-    const yearSelect = section.querySelector('.filter-year');
-    const authorSelect = section.querySelector('.filter-author');
-    const accordions = section.querySelectorAll('.year-accordion');
-
-    const applyFilters = () => {
-      const selectedYears = normalizeSelection(yearSelect);
-      const selectedAuthors = normalizeSelection(authorSelect);
-
+  const applyFilters = () => {
+    sections.forEach(section => {
+      const yearDropdown = section.querySelector('.filter-year');
+      const authorDropdown = section.querySelector('.filter-author');
+      const accordions = section.querySelectorAll('.year-accordion');
+      
+      const selectedYears = yearDropdown ? getSelectedValues(yearDropdown) : ['all'];
+      const selectedAuthors = authorDropdown ? getSelectedValues(authorDropdown) : ['all'];
+      
       accordions.forEach(acc => {
         const rows = acc.querySelectorAll('tbody tr');
         let visibleRows = 0;
-
+        
         rows.forEach(row => {
           const rowYear = row.getAttribute('data-year');
           const rowAuthor = row.getAttribute('data-author');
@@ -354,27 +520,14 @@ document.addEventListener('DOMContentLoaded', function() {
           row.style.display = shouldShow ? '' : 'none';
           if (shouldShow) visibleRows++;
         });
-
+        
         // Hide entire accordion if no rows match
         acc.style.display = visibleRows > 0 ? '' : 'none';
       });
-    };
-
-    if (yearSelect) {
-      yearSelect.addEventListener('change', () => {
-        normalizeSelection(yearSelect);
-        applyFilters();
-      });
-    }
-    if (authorSelect) {
-      authorSelect.addEventListener('change', () => {
-        normalizeSelection(authorSelect);
-        applyFilters();
-      });
-    }
-
-    // Initial filter application
-    applyFilters();
-  });
+    });
+  };
+  
+  // Initial filter application
+  applyFilters();
 });
 </script>

@@ -8,15 +8,15 @@ permalink: /categories/
 <header class="page-header">
   <h1 class="page-title">Categories</h1>
   <p class="page-description">Browse all posts organized by category.</p>
-</header>
-
-{% if site.categories.size > 0 %}
+    </header>
+    
+    {% if site.categories.size > 0 %}
   <div class="archive-section">
-    {% assign sorted_categories = site.categories | sort %}
-    {% for category in sorted_categories %}
+      {% assign sorted_categories = site.categories | sort %}
+        {% for category in sorted_categories %}
       <section class="archive-category" id="{{ category[0] | slugify }}">
         <h2 class="archive-category-title">
-          {{ category[0] }}
+              {{ category[0] }}
           <span class="count">({{ category[1].size }} post{% if category[1].size != 1 %}s{% endif %})</span>
         </h2>
         
@@ -28,11 +28,11 @@ permalink: /categories/
               <span class="date">{{ post.date | date: "%b %d, %Y" }}</span>
             </a>
           </li>
-          {% endfor %}
+        {% endfor %}
         </ul>
       </section>
-    {% endfor %}
-  </div>
+            {% endfor %}
+          </div>
 {% else %}
   <div class="text-center" style="padding: 4rem 0;">
     <p style="color: var(--text-muted); font-size: 1.125rem;">No categories yet.</p>
