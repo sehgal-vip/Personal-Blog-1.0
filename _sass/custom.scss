@@ -2178,86 +2178,31 @@ strong, b {
   
   .data-table {
     font-size: 0.875rem;
-    display: block;
+    display: table;
     width: 100%;
-    overflow-x: visible;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     
     thead {
-      display: none; // Hide header on mobile
+      display: table-header-group;
     }
     
     tbody {
-      display: block;
+      display: table-row-group;
     }
     
     tr {
-      display: block;
-      margin-bottom: 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1rem;
-      background: var(--card-bg);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      display: table-row;
     }
     
     td {
-      display: block;
+      display: table-cell;
       text-align: left;
-      padding: 0.5rem 0;
-      border: none;
-      width: 100% !important;
+      padding: 0.5rem;
+      border: 1px solid var(--border-color);
       
       &::before {
-        content: attr(data-label) ": ";
-        font-weight: 600;
-        color: var(--color-primary);
-        display: inline-block;
-        margin-right: 0.5rem;
-        font-size: 0.8125rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-    }
-    
-    .title-cell {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border-color);
-      
-      &::before {
-        display: block;
-        margin-bottom: 0.5rem;
-      }
-      
-      a {
-        color: var(--color-primary);
-        word-break: break-word;
-      }
-    }
-    
-    .author-cell,
-    .year-cell {
-      display: inline-block;
-      width: auto;
-      margin-right: 1rem;
-      margin-bottom: 0.5rem;
-      
-      &::before {
-        display: inline;
-      }
-    }
-    
-    .desc-cell {
-      margin-top: 0.5rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid var(--border-color);
-      
-      &::before {
-        display: block;
-        margin-bottom: 0.25rem;
+        display: none;
       }
     }
   }
