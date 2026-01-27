@@ -98,16 +98,16 @@ permalink: /reading/
       <tbody>
         {% for item in papers_sorted %}
         <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
-          <td class="title-cell">
+          <td class="title-cell" data-label="Title">
             {% if item.url and item.url != "" %}
             <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
             {% else %}
             {{ item.title }}
             {% endif %}
           </td>
-          <td class="author-cell">{{ item.author }}</td>
-          <td class="year-cell">{{ item.year }}</td>
-          <td class="desc-cell">{{ item.description }}</td>
+          <td class="author-cell" data-label="Author">{{ item.author }}</td>
+          <td class="year-cell" data-label="Year">{{ item.year }}</td>
+          <td class="desc-cell" data-label="Description">{{ item.description }}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -207,16 +207,16 @@ permalink: /reading/
       <tbody>
         {% for item in books_sorted %}
         <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
-          <td class="title-cell">
+          <td class="title-cell" data-label="Title">
             {% if item.url and item.url != "" %}
             <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
             {% else %}
             {{ item.title }}
             {% endif %}
           </td>
-          <td class="author-cell">{{ item.author }}</td>
-          <td class="year-cell">{{ item.year }}</td>
-          <td class="desc-cell">{{ item.description }}</td>
+          <td class="author-cell" data-label="Author">{{ item.author }}</td>
+          <td class="year-cell" data-label="Year">{{ item.year }}</td>
+          <td class="desc-cell" data-label="Description">{{ item.description }}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -316,16 +316,16 @@ permalink: /reading/
       <tbody>
         {% for item in articles_sorted %}
         <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
-          <td class="title-cell">
+          <td class="title-cell" data-label="Title">
             {% if item.url and item.url != "" %}
             <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
             {% else %}
             {{ item.title }}
             {% endif %}
           </td>
-          <td class="author-cell">{{ item.author }}</td>
-          <td class="year-cell">{{ item.year }}</td>
-          <td class="desc-cell">{{ item.description }}</td>
+          <td class="author-cell" data-label="Author">{{ item.author }}</td>
+          <td class="year-cell" data-label="Year">{{ item.year }}</td>
+          <td class="desc-cell" data-label="Description">{{ item.description }}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -425,16 +425,16 @@ permalink: /reading/
       <tbody>
         {% for item in others_sorted %}
         <tr data-year="{{ item.year }}" data-author="{{ item.author }}">
-          <td class="title-cell">
+          <td class="title-cell" data-label="Title">
             {% if item.url and item.url != "" %}
             <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
             {% else %}
             {{ item.title }}
             {% endif %}
           </td>
-          <td class="author-cell">{{ item.author }}</td>
-          <td class="year-cell">{{ item.year }}</td>
-          <td class="desc-cell">{{ item.description }}</td>
+          <td class="author-cell" data-label="Author">{{ item.author }}</td>
+          <td class="year-cell" data-label="Year">{{ item.year }}</td>
+          <td class="desc-cell" data-label="Description">{{ item.description }}</td>
         </tr>
         {% endfor %}
       </tbody>

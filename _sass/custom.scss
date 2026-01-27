@@ -2049,9 +2049,174 @@ strong, b {
 }
 
 
+// Mobile responsive styles for filters and tables
+@media (max-width: 767px) {
+  .section-filters {
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .filter-group {
+    flex: 1 1 calc(50% - 0.25rem);
+    min-width: 0;
+  }
+  
+  .filter-toggle {
+    min-width: 0;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    
+    &[data-filter="author"] {
+      min-width: 0;
+    }
+  }
+  
+  .filter-dropdown {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 2rem);
+    max-width: 320px;
+    min-width: 0;
+    max-height: 50vh;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    
+    &.filter-author {
+      max-width: 90vw;
+    }
+    
+    &.sort-dropdown {
+      max-width: 280px;
+    }
+  }
+  
+  .filter-option {
+    padding: 0.625rem 0.5rem;
+    font-size: 0.875rem;
+    min-height: 44px; // Better touch target
+    
+    span {
+      font-size: 0.875rem;
+    }
+  }
+  
+  .sort-apply-btn {
+    min-height: 44px; // Better touch target
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+  }
+  
+  .data-table {
+    font-size: 0.875rem;
+    display: block;
+    width: 100%;
+    overflow-x: visible;
+    -webkit-overflow-scrolling: touch;
+    
+    thead {
+      display: none; // Hide header on mobile
+    }
+    
+    tbody {
+      display: block;
+    }
+    
+    tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      background: var(--card-bg);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    td {
+      display: block;
+      text-align: left;
+      padding: 0.5rem 0;
+      border: none;
+      width: 100% !important;
+      
+      &::before {
+        content: attr(data-label) ": ";
+        font-weight: 600;
+        color: var(--color-primary);
+        display: inline-block;
+        margin-right: 0.5rem;
+        font-size: 0.8125rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+    
+    .title-cell {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      
+      &::before {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      
+      a {
+        color: var(--color-primary);
+        word-break: break-word;
+      }
+    }
+    
+    .author-cell,
+    .year-cell {
+      display: inline-block;
+      width: auto;
+      margin-right: 1rem;
+      margin-bottom: 0.5rem;
+      
+      &::before {
+        display: inline;
+      }
+    }
+    
+    .desc-cell {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border-color);
+      
+      &::before {
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .section-icon {
+    font-size: 1.125rem;
+  }
+}
+
 @media (max-width: 600px) {
   .filter-select {
     min-width: 120px;
+  }
+  
+  .filter-group {
+    flex: 1 1 100%;
+  }
+  
+  .filter-dropdown {
+    width: calc(100vw - 1rem);
+    max-width: none;
   }
 }
 
