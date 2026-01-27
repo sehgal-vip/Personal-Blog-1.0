@@ -392,29 +392,57 @@
    * Execute a command
    */
   function executeCommand(cmd) {
+    if (!cmd) {
+      console.error('Command is undefined');
+      return;
+    }
+    
+    console.log('Executing command:', cmd);
+    
     saveRecentCommand(cmd);
     close();
 
-    switch (cmd.action) {
-      case 'navigate':
-        window.location.href = cmd.url;
-        break;
+    // Small delay to ensure palette closes before navigation
+    setTimeout(() => {
+      switch (cmd.action) {
+        case 'navigate':
+          if (cmd.url) {
+            // Ensure URL is properly formatted
+            let url = cmd.url;
+            // If URL doesn't start with http/https, ensure it starts with /
+            if (!url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('/')) {
+              url = '/' + url;
+            }
+            console.log('Navigating to:', url);
+            window.location.href = url;
+          } else {
+            console.error('Command missing URL:', cmd);
+          }
+          break;
 
-      case 'external':
-        window.open(cmd.url, '_blank', 'noopener,noreferrer');
-        break;
+        case 'external':
+          if (cmd.url) {
+            window.open(cmd.url, '_blank', 'noopener,noreferrer');
+          } else {
+            console.error('Command missing URL:', cmd);
+          }
+          break;
 
-      case 'toggle-theme':
-        if (window.ThemeToggle) {
-          window.ThemeToggle.toggle();
-        }
-        break;
+        case 'toggle-theme':
+          if (window.ThemeToggle) {
+            window.ThemeToggle.toggle();
+          }
+          break;
 
-      case 'copy-url':
-        copyToClipboard(window.location.href);
-        showToast('URL copied to clipboard!');
-        break;
-    }
+        case 'copy-url':
+          copyToClipboard(window.location.href);
+          showToast('URL copied to clipboard!');
+          break;
+          
+        default:
+          console.error('Unknown command action:', cmd.action);
+      }
+    }, 100);
   }
 
   /**
@@ -500,7 +528,9 @@
 
     // Add click handlers
     results.querySelectorAll('.command-item').forEach((el, i) => {
-      el.addEventListener('click', () => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const index = parseInt(el.dataset.index, 10);
         if (filteredResults[index]) {
           executeCommand(filteredResults[index]);
