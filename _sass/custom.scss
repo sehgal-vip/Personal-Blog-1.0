@@ -347,8 +347,9 @@ strong, b {
   text-align: left;
   margin-left: 0.25rem;
   white-space: nowrap;
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  line-height: 1.2;
+  vertical-align: middle;
   flex-shrink: 0;
   
   @media (max-width: 767px) {
@@ -360,6 +361,7 @@ strong, b {
     text-overflow: ellipsis;
     flex: 0 1 auto;
     min-width: 0;
+    display: inline-block;
   }
   
   &:hover {
