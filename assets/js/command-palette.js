@@ -532,8 +532,12 @@
         e.preventDefault();
         e.stopPropagation();
         const index = parseInt(el.dataset.index, 10);
+        console.log('Click handler triggered, index:', index, 'filteredResults length:', filteredResults.length);
         if (filteredResults[index]) {
+          console.log('Command found:', filteredResults[index]);
           executeCommand(filteredResults[index]);
+        } else {
+          console.error('No command found at index:', index, 'filteredResults:', filteredResults);
         }
       });
 
@@ -541,6 +545,10 @@
         selectedIndex = parseInt(el.dataset.index, 10);
         render();
       });
+      
+      // Make items keyboard accessible
+      el.setAttribute('role', 'option');
+      el.setAttribute('tabindex', '-1');
     });
   }
 
