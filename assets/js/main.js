@@ -20,6 +20,7 @@
     setupLazyLoading();
     setupScrollReveal();
     setupScrollIndicator();
+    setupHeroScrollAnimation();
   }
 
   /**
@@ -395,6 +396,58 @@
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+  }
+
+  /**
+   * Hero scroll animation - text scales up, background fades out
+   */
+  function setupHeroScrollAnimation() {
+    const heroBg = document.querySelector('.hero-bg-fixed');
+    const heroTitle = document.querySelector('.hero-title');
+    const heroContent = document.querySelector('.hero-content');
+
+    if (!heroBg || !heroTitle) return;
+
+    let ticking = false;
+
+    function updateHeroOnScroll() {
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const scrollPercent = Math.min(scrollY / viewportHeight, 1);
+
+      // Scale text: 1x at top → 1.15x at bottom of first fold
+      const scale = 1 + (scrollPercent * 0.15);
+      heroTitle.style.transform = `scale(${scale})`;
+
+      // Fade out hero background: full opacity → 0 at second fold
+      heroBg.style.opacity = 1 - scrollPercent;
+
+      // Hide completely when past first fold
+      if (scrollPercent >= 1) {
+        heroBg.classList.add('hidden');
+      } else {
+        heroBg.classList.remove('hidden');
+      }
+
+      // Slight parallax on content (optional)
+      if (heroContent) {
+        heroContent.style.transform = `translateY(${scrollPercent * -30}px)`;
+      }
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateHeroOnScroll);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Initial state
+    updateHeroOnScroll();
   }
 
   // Initialize

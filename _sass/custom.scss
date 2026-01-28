@@ -893,9 +893,10 @@ strong, b {
   min-height: calc(100vh - var(--header-height));
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;  // Position text at bottom
   align-items: center;
   padding: 2rem;
+  padding-bottom: 4rem;
   position: relative;
 }
 
@@ -910,6 +911,8 @@ strong, b {
   background-position: center 25%;  // Focus on upper portion (statue face)
   background-repeat: no-repeat;
   z-index: 0;  // In front of body textures (-2, -1)
+  transition: opacity 0.15s ease-out;
+  will-change: opacity;
 
   // Adjust focus point for different screen sizes
   @media (max-width: 768px) {
@@ -918,6 +921,11 @@ strong, b {
 
   @media (min-aspect-ratio: 21/9) {
     background-position: center 30%;  // Ultra-wide screens
+  }
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
@@ -954,6 +962,7 @@ strong, b {
   max-width: 600px;
   position: relative;
   z-index: 1;
+  will-change: transform, opacity;
 }
 
 .hero-avatar {
