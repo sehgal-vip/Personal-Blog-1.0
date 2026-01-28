@@ -899,20 +899,25 @@ strong, b {
   position: relative;
 }
 
-// Fixed background image for hero
+// Fixed background image for hero - always fills viewport
 .hero-bg-fixed {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 100vh;
-  background-size: 110%;  // Zoomed out slightly
-  background-position: center 20%;
+  background-size: cover;  // Always fills viewport, crops dynamically
+  background-position: center 25%;  // Focus on upper portion (statue face)
   background-repeat: no-repeat;
   z-index: -2;
 
-  @media (max-width: 1024px) {
-    background-size: cover;  // Full cover on smaller screens
+  // Adjust focus point for different screen sizes
+  @media (max-width: 768px) {
+    background-position: center 20%;  // Show more of statue on mobile
+  }
+
+  @media (min-aspect-ratio: 21/9) {
+    background-position: center 30%;  // Ultra-wide screens
   }
 }
 
