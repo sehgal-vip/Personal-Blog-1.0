@@ -3,34 +3,35 @@
 // =============================================================================
 
 :root {
-  // Colors - Sandstone/Classical palette
-  --color-primary: #C4A77D;
-  --color-secondary: #8B7355;
-  --color-primary-hover: #B89968;
-  --color-secondary-hover: #7A6548;
-  --color-accent: #D4C4A8;
+  // Colors - Hellenic Helios (Light) palette
+  // Sun-drenched marble, deep sea blues, bright terracotta. High contrast.
+  --color-primary: #C5A059;      // Gold/Ochre - Sunlight
+  --color-secondary: #004C98;    // Aegean Blue - The Sea
+  --color-primary-hover: #D4AF37;
+  --color-secondary-hover: #003A75;
+  --color-accent: #E2725B;       // Terracotta - Pottery
 
-  // Light theme (Sandstone/Marble)
-  --bg-color: #FAF8F5;
-  --bg-secondary: #F0EBE3;
-  --bg-tertiary: #E8E2D9;
-  --text-color: #2C2416;
-  --text-muted: #6B5D4D;
-  --text-subtle: #9A8B7A;
-  --border-color: #DDD5C8;
-  --code-bg: #F0EBE3;
-  --card-bg: #FAF8F5;
-  --card-shadow: 0 2px 8px rgba(44, 36, 22, 0.08);
-  --header-bg: rgba(250, 248, 245, 0.95);
+  // Light theme (Helios - Sunlit Stone)
+  --bg-color: #F5F7FA;           // Marble White
+  --bg-secondary: #EBEEF2;
+  --bg-tertiary: #E1E5EB;
+  --text-color: #1F2933;         // Obsidian - Text & Ink
+  --text-muted: #52606D;
+  --text-subtle: #7B8794;
+  --border-color: #CBD2D9;
+  --code-bg: #EBEEF2;
+  --card-bg: #F5F7FA;
+  --card-shadow: 0 2px 8px rgba(31, 41, 51, 0.08);
+  --header-bg: rgba(245, 247, 250, 0.95);
   --header-blur: blur(12px);
-  --shadow-color: rgba(44, 36, 22, 0.08);
-  
+  --shadow-color: rgba(31, 41, 51, 0.08);
+
   // Command palette
   --backdrop-color: rgba(0, 0, 0, 0.6);
-  --modal-bg: #ffffff;
+  --modal-bg: #F5F7FA;
   --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  --kbd-bg: #e9ecef;
-  --kbd-color: #495057;
+  --kbd-bg: #E1E5EB;
+  --kbd-color: #1F2933;
   
   // Layout
   --header-height: 64px;
@@ -61,32 +62,33 @@
 }
 
 [data-theme="dark"] {
-  // Dark theme (Night Marble/Bronze)
-  --color-primary: #D4B896;
-  --color-secondary: #A89078;
-  --color-primary-hover: #E5CBA8;
-  --color-secondary-hover: #B9A189;
-  --color-accent: #8B7355;
+  // Dark theme (Nyx - Midnight in the temple)
+  // Deep obsidian, muted gold (torchlight), slate grey. Lower contrast, softer on eyes.
+  --color-primary: #D4AF37;      // Gold/Ochre - Torchlight
+  --color-secondary: #1B2A41;    // Aegean Blue - Deep Night Sky
+  --color-primary-hover: #E5C04A;
+  --color-secondary-hover: #243752;
+  --color-accent: #A85642;       // Terracotta - Fired Earth
 
-  --bg-color: #1C1A17;
-  --bg-secondary: #252219;
-  --bg-tertiary: #2E2A24;
-  --text-color: #E8E2D9;
-  --text-muted: #A89B8A;
-  --text-subtle: #6B5D4D;
-  --border-color: #3D3730;
-  --code-bg: #252219;
-  --card-bg: #252219;
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --header-bg: rgba(28, 26, 23, 0.95);
+  --bg-color: #121619;           // Marble White (dark) - Shadowed Stone
+  --bg-secondary: #1A1F24;
+  --bg-tertiary: #232A31;
+  --text-color: #E1E7EF;         // Obsidian (inverted) - Moonlight Text
+  --text-muted: #9AA5B1;
+  --text-subtle: #616E7C;
+  --border-color: #323F4B;
+  --code-bg: #1A1F24;
+  --card-bg: #1A1F24;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --header-bg: rgba(18, 22, 25, 0.95);
   --header-blur: blur(12px);
-  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color: rgba(0, 0, 0, 0.4);
 
-  --backdrop-color: rgba(0, 0, 0, 0.8);
-  --modal-bg: #252219;
-  --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  --kbd-bg: #3D3730;
-  --kbd-color: #E8E2D9;
+  --backdrop-color: rgba(0, 0, 0, 0.85);
+  --modal-bg: #1A1F24;
+  --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  --kbd-bg: #323F4B;
+  --kbd-color: #E1E7EF;
 }
 
 // =============================================================================
@@ -143,7 +145,7 @@ body {
     z-index: -1;
     pointer-events: none;
     opacity: 0.08;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0V0zm30 30v-10h-10v-10H10v10H0v10h10v10h10v10h10v-10h10v-10H30zm0-20v10h10V10H30zM10 30H0v10h10V30zm40-20v10h10V10H50zm0 20v10h10V30H50z' fill='%23C4A77D' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0V0zm30 30v-10h-10v-10H10v10H0v10h10v10h10v10h10v-10h10v-10H30zm0-20v10h10V10H30zM10 30H0v10h10V30zm40-20v10h10V10H50zm0 20v10h10V30H50z' fill='%23C5A059' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
     background-size: 60px 60px;
     animation: greekTileDrift 20s linear infinite;
   }
@@ -172,7 +174,7 @@ body {
   }
   &::after {
     opacity: 0.06;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0V0zm30 30v-10h-10v-10H10v10H0v10h10v10h10v10h10v-10h10v-10H30zm0-20v10h10V10H30zM10 30H0v10h10V30zm40-20v10h10V10H50zm0 20v10h10V30H50z' fill='%23D4B896' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0V0zm30 30v-10h-10v-10H10v10H0v10h10v10h10v10h10v-10h10v-10H30zm0-20v10h10V10H30zM10 30H0v10h10V30zm40-20v10h10V10H50zm0 20v10h10V30H50z' fill='%23D4AF37' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 }
 
@@ -1004,7 +1006,7 @@ strong, b {
     width: min(400px, 80%);
     height: 12px;
     opacity: 0.15;
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h8v4H4v4H0V0zm8 4h4v4H8V4zm4-4h8v8h-4V4h-4V0zm12 0h4v4h4v4h-8V4h-4v4H8v4H4v-4h4V4h4V0h4zm8 0h4v8h-4V0z' fill='%23C4A77D' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h8v4H4v4H0V0zm8 4h4v4H8V4zm4-4h8v8h-4V4h-4V0zm12 0h4v4h4v4h-8V4h-4v4H8v4H4v-4h4V4h4V0h4zm8 0h4v8h-4V0z' fill='%23C5A059' fill-rule='evenodd'/%3E%3C/svg%3E");
     background-repeat: repeat-x;
     background-size: 40px 12px;
   }
@@ -1022,7 +1024,7 @@ strong, b {
   &::before,
   &::after {
     opacity: 0.1;
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h8v4H4v4H0V0zm8 4h4v4H8V4zm4-4h8v8h-4V4h-4V0zm12 0h4v4h4v4h-8V4h-4v4H8v4H4v-4h4V4h4V0h4zm8 0h4v8h-4V0z' fill='%23D4B896' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h8v4H4v4H0V0zm8 4h4v4H8V4zm4-4h8v8h-4V4h-4V0zm12 0h4v4h4v4h-8V4h-4v4H8v4H4v-4h4V4h4V0h4zm8 0h4v8h-4V0z' fill='%23D4AF37' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 }
 
