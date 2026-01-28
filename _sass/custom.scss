@@ -909,7 +909,7 @@ strong, b {
   background-size: cover;  // Always fills viewport, crops dynamically
   background-position: center 25%;  // Focus on upper portion (statue face)
   background-repeat: no-repeat;
-  z-index: -2;
+  z-index: 0;  // In front of body textures (-2, -1)
 
   // Adjust focus point for different screen sizes
   @media (max-width: 768px) {
