@@ -1570,20 +1570,23 @@ strong, b {
 
   @media (min-width: 1024px) {
     display: block;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    max-height: calc(100vh - var(--header-height) - 4rem);
+    overflow-y: auto;
   }
 }
 
 .toc-nav {
-  position: sticky;
-  top: calc(var(--header-height) + 2rem);
-  max-height: calc(100vh - var(--header-height) - 4rem);
-  overflow-y: auto;
   background: rgba(225, 229, 235, 0.4);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
+  height: 100%;
+  overflow-y: auto;
 
   // Custom scrollbar styling
   &::-webkit-scrollbar {
