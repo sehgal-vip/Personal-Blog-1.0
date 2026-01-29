@@ -1,8 +1,12 @@
 <footer class="site-footer">
   <div class="footer-content">
-    <!-- Left: Copyright -->
+    <!-- Left: Navigation Links -->
     <div class="footer-left">
-      <p class="footer-copyright">© 2026 Vipul Sehgal</p>
+      <nav class="footer-nav">
+        <a href="{{ '/blog/' | relative_url }}">Blog</a>
+        <span class="separator">•</span>
+        <a href="{{ '/about/' | relative_url }}">About</a>
+      </nav>
     </div>
 
     <!-- Center: Social Icons -->
@@ -45,13 +49,9 @@
       </div>
     </div>
 
-    <!-- Right: Navigation Links -->
+    <!-- Right: Copyright -->
     <div class="footer-right">
-      <nav class="footer-nav">
-        <a href="{{ '/blog/' | relative_url }}">Blog</a>
-        <span class="separator">•</span>
-        <a href="{{ '/about/' | relative_url }}">About</a>
-      </nav>
+      <p class="footer-copyright">© 2026 Vipul Sehgal</p>
     </div>
   </div>
 </footer>
