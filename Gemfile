@@ -1,5 +1,9 @@
 source "https://rubygems.org"
 
+# Ruby 4.0+ requires these gems explicitly
+gem "csv"
+gem "bigdecimal"
+
 # Use GitHub Pages gem for compatibility
 gem "github-pages", group: :jekyll_plugins
 

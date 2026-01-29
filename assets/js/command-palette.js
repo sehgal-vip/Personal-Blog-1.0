@@ -661,7 +661,18 @@
    */
   function scrollSelectedIntoView() {
     const selected = results.querySelector('.command-item.selected');
-    if (selected) {
+    if (!selected || !results) return;
+
+    // Get bounding boxes
+    const selectedRect = selected.getBoundingClientRect();
+    const containerRect = results.getBoundingClientRect();
+
+    // Check if item is already visible
+    const isAboveView = selectedRect.top < containerRect.top;
+    const isBelowView = selectedRect.bottom > containerRect.bottom;
+
+    // Only scroll if item is out of view
+    if (isAboveView || isBelowView) {
       selected.scrollIntoView({
         block: 'nearest',
         behavior: 'smooth'
