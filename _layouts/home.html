@@ -3,8 +3,15 @@ layout: default
 hide_breadcrumbs: true
 ---
 
-<!-- Fixed Hero Background Image -->
-<div class="hero-bg-fixed" style="background-image: url('{{ '/assets/images/hero-greek.png' | relative_url }}');">
+<!-- Fixed Hero Background Video -->
+<div class="hero-bg-fixed" id="hero-video-container">
+  <video id="hero-video"
+         muted
+         playsinline
+         preload="auto"
+         poster="{{ '/assets/images/hero-greek.png' | relative_url }}">
+    <source src="{{ '/assets/videos/VipulWideVideo.mp4' | relative_url }}" type="video/mp4">
+  </video>
   <div class="hero-overlay"></div>
 </div>
 
