@@ -1112,6 +1112,11 @@ strong, b {
   position: relative;
   z-index: 10;
   background: var(--bg-primary);
+  // Full-bleed background
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: calc(50vw - 50% + 2rem);
+  padding-right: calc(50vw - 50% + 2rem);
 
   // Greek key border top and bottom
   &::before,
@@ -1174,12 +1179,22 @@ strong, b {
 
 // Latest Updates Section
 .latest-updates {
-  padding: 4rem 0 5rem;
-  max-width: 900px;
-  margin: 0 auto;
+  padding: 4rem 2rem 5rem;
   position: relative;
   z-index: 10;
   background: var(--bg-primary);
+  // Full-bleed background
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: calc(50vw - 50% + 2rem);
+  padding-right: calc(50vw - 50% + 2rem);
+
+  // Inner content max-width
+  > * {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .posts-grid {
     display: grid;
