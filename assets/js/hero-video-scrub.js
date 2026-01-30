@@ -19,9 +19,10 @@
   // Total scroll distance (200vh)
   const scrollDistance = window.innerHeight * 2;
 
-  // Spacer = full scroll distance so content appears after 100%
+  // Spacer = scroll distance + viewport height so content appears after 100% scroll
+  // (accounts for viewport showing content before we've scrolled to its position)
   const spacer = document.createElement('div');
-  spacer.style.cssText = 'height:' + scrollDistance + 'px;';
+  spacer.style.cssText = 'height:' + (scrollDistance + window.innerHeight) + 'px;';
   heroSection.after(spacer);
 
   // Fixed hero positioning
