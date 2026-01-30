@@ -2,13 +2,9 @@
  * Hero Video Scroll Scrub
  *
  * Sequence:
- * - 0-100%: Video scrubs from start to end
- * - 0-50%: Hero fully visible
- * - 50-70%: Hero fades out (opacity 1 → 0)
- * - 70%+: Hero hidden, content sections visible
- *
- * Scroll distance = 200vh (2x viewport height)
- * Hero hidden at 70% = 140vh scroll
+ * - 0-70%: Video scrubs from 0% to 100%
+ * - 70-100%: Hero text fades out
+ * - 100%+: Content sections visible
  */
 (function() {
   'use strict';
@@ -20,17 +16,15 @@
 
   if (!video || !heroSection) return;
 
-  // Configuration
-  const scrollDistance = window.innerHeight * 2; // 200vh total scroll for video
-  const hidePoint = 0.7; // Hero hidden at 70% scroll
+  // Total scroll distance (200vh)
+  const scrollDistance = window.innerHeight * 2;
 
-  // Create spacer - matches the point where hero hides
+  // Spacer = full scroll distance so content appears after 100%
   const spacer = document.createElement('div');
-  spacer.className = 'hero-scroll-spacer';
-  spacer.style.cssText = 'height:' + (scrollDistance * hidePoint) + 'px;position:relative;z-index:0;';
+  spacer.style.cssText = 'height:' + scrollDistance + 'px;';
   heroSection.after(spacer);
 
-  // Style hero section (fixed, behind content)
+  // Fixed hero positioning
   heroSection.style.cssText = [
     'position:fixed',
     'top:64px',
@@ -48,7 +42,7 @@
     'box-sizing:border-box'
   ].join(';');
 
-  // Style scroll indicator
+  // Scroll indicator styling
   if (scrollIndicator) {
     scrollIndicator.style.cssText = [
       'position:fixed',
@@ -57,10 +51,7 @@
       'right:0',
       'margin:0 auto',
       'width:fit-content',
-      'z-index:1',
-      'display:flex',
-      'flex-direction:column',
-      'align-items:center'
+      'z-index:1'
     ].join(';');
   }
 
@@ -68,40 +59,49 @@
     const scrollY = window.scrollY;
     const progress = Math.min(scrollY / scrollDistance, 1);
 
-    // Video scrub: 0-100% scroll = 0-100% video
+    // VIDEO: 0-70% scroll = 0-100% video
     if (video.duration) {
-      video.currentTime = progress * video.duration;
+      const videoProgress = Math.min(progress / 0.7, 1);
+      video.currentTime = videoProgress * video.duration;
     }
 
-    // Calculate fade (50% to 70% scroll)
-    let opacity = 1;
-    if (progress >= hidePoint) {
-      opacity = 0;
-    } else if (progress > 0.5) {
-      // Fade from 1 to 0 between 50% and 70%
-      opacity = 1 - ((progress - 0.5) / (hidePoint - 0.5));
-    }
-
-    // Apply to hero section
-    heroSection.style.opacity = opacity;
-    heroSection.style.visibility = opacity <= 0 ? 'hidden' : 'visible';
-
-    // Apply to background
-    if (heroBg) {
-      heroBg.style.opacity = opacity;
-      heroBg.style.visibility = opacity <= 0 ? 'hidden' : 'visible';
-    }
-
-    // Scroll indicator fades earlier (20% to 40%)
-    if (scrollIndicator) {
-      let indicatorOpacity = 1;
-      if (progress >= 0.4) {
-        indicatorOpacity = 0;
-      } else if (progress > 0.2) {
-        indicatorOpacity = 1 - ((progress - 0.2) / 0.2);
+    // HERO TEXT: Visible 0-70%, fades 70-100%, hidden after 100%
+    if (progress <= 0.7) {
+      heroSection.style.opacity = '1';
+      heroSection.style.visibility = 'visible';
+      if (heroBg) {
+        heroBg.style.opacity = '1';
+        heroBg.style.visibility = 'visible';
       }
-      scrollIndicator.style.opacity = indicatorOpacity;
-      scrollIndicator.style.visibility = indicatorOpacity <= 0 ? 'hidden' : 'visible';
+    } else if (progress < 1) {
+      // Fade from 70% to 100%
+      const fadeProgress = (progress - 0.7) / 0.3;
+      const opacity = 1 - fadeProgress;
+      heroSection.style.opacity = opacity;
+      heroSection.style.visibility = 'visible';
+      if (heroBg) {
+        heroBg.style.opacity = opacity;
+        heroBg.style.visibility = 'visible';
+      }
+    } else {
+      // Hidden at 100%+
+      heroSection.style.opacity = '0';
+      heroSection.style.visibility = 'hidden';
+      if (heroBg) {
+        heroBg.style.opacity = '0';
+        heroBg.style.visibility = 'hidden';
+      }
+    }
+
+    // SCROLL INDICATOR: Fades earlier (40-60%)
+    if (scrollIndicator) {
+      if (progress <= 0.4) {
+        scrollIndicator.style.opacity = '1';
+      } else if (progress < 0.6) {
+        scrollIndicator.style.opacity = 1 - ((progress - 0.4) / 0.2);
+      } else {
+        scrollIndicator.style.opacity = '0';
+      }
     }
   }
 
