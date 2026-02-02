@@ -16,6 +16,7 @@
   const video = document.getElementById('hero-video');
   const heroSection = document.querySelector('.hero-fullscreen');
   const heroBg = document.querySelector('.hero-bg-fixed');
+  const heroContent = document.querySelector('.hero-content');
   const scrollIndicator = document.querySelector('.scroll-indicator');
 
   if (!video || !heroSection) return;
@@ -59,7 +60,13 @@
   if (heroBg) {
     heroBg.style.willChange = 'opacity';
     heroBg.style.backfaceVisibility = 'hidden';
-    heroBg.style.transition = 'none'; // Remove CSS transition - JS handles it
+    heroBg.style.transition = 'none';
+  }
+
+  // GPU-accelerated hero content styles
+  if (heroContent) {
+    heroContent.style.willChange = 'opacity';
+    heroContent.style.backfaceVisibility = 'hidden';
   }
 
   // Throttling state
@@ -119,7 +126,7 @@
       heroSection.style.visibility = scrollBeyond > heroHeight ? 'hidden' : 'visible';
     }
 
-    // HERO BACKGROUND OPACITY
+    // HERO BACKGROUND OPACITY - fade 70-100%
     if (heroBg) {
       if (progress <= 0.7) {
         heroBg.style.opacity = '1';
@@ -130,6 +137,17 @@
       } else {
         heroBg.style.opacity = '0';
         heroBg.style.visibility = 'hidden';
+      }
+    }
+
+    // HERO CONTENT OPACITY - fade with background 70-100%
+    if (heroContent) {
+      if (progress <= 0.7) {
+        heroContent.style.opacity = '1';
+      } else if (progress < 1) {
+        heroContent.style.opacity = (1 - (progress - 0.7) / 0.3).toFixed(2);
+      } else {
+        heroContent.style.opacity = '0';
       }
     }
 
