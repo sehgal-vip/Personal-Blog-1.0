@@ -89,6 +89,18 @@ permalink: /reading/
         {% endfor %}
       </tbody>
     </table>
+    <div class="section-pagination" data-section="papers">
+      <button class="pagination-btn pagination-prev" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Prev
+      </button>
+      <span class="pagination-info">Page 1 of 1</span>
+      <button class="pagination-btn pagination-next">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <button class="pagination-btn pagination-all">Select All</button>
+    </div>
   </section>
   {% endif %}
 
@@ -198,6 +210,18 @@ permalink: /reading/
         {% endfor %}
       </tbody>
     </table>
+    <div class="section-pagination" data-section="books">
+      <button class="pagination-btn pagination-prev" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Prev
+      </button>
+      <span class="pagination-info">Page 1 of 1</span>
+      <button class="pagination-btn pagination-next">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <button class="pagination-btn pagination-all">Select All</button>
+    </div>
   </section>
   {% endif %}
 
@@ -284,6 +308,18 @@ permalink: /reading/
         {% endfor %}
       </tbody>
     </table>
+    <div class="section-pagination" data-section="articles">
+      <button class="pagination-btn pagination-prev" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Prev
+      </button>
+      <span class="pagination-info">Page 1 of 1</span>
+      <button class="pagination-btn pagination-next">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <button class="pagination-btn pagination-all">Select All</button>
+    </div>
   </section>
   {% endif %}
 
@@ -393,23 +429,43 @@ permalink: /reading/
         {% endfor %}
       </tbody>
     </table>
+    <div class="section-pagination" data-section="others">
+      <button class="pagination-btn pagination-prev" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Prev
+      </button>
+      <span class="pagination-info">Page 1 of 1</span>
+      <button class="pagination-btn pagination-next">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <button class="pagination-btn pagination-all">Select All</button>
+    </div>
   </section>
   {% endif %}
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // Pagination state per section
+  const paginationState = {
+    papers: { page: 1, perPage: 5, showAll: false },
+    books: { page: 1, perPage: 5, showAll: false },
+    articles: { page: 1, perPage: 5, showAll: false },
+    others: { page: 1, perPage: 5, showAll: false }
+  };
+
   // Collapsible filter dropdowns
   const filterToggles = document.querySelectorAll('.filter-toggle');
   const filterDropdowns = document.querySelectorAll('.filter-dropdown');
-  
+
   // Toggle dropdown visibility
   filterToggles.forEach(toggle => {
     toggle.addEventListener('click', function(e) {
       e.stopPropagation();
       const dropdown = this.nextElementSibling;
       const isOpen = dropdown.classList.contains('open');
-      
+
       // Close all other dropdowns
       filterDropdowns.forEach(d => {
         if (d !== dropdown) {
@@ -417,13 +473,13 @@ document.addEventListener('DOMContentLoaded', function() {
           d.previousElementSibling.classList.remove('active');
         }
       });
-      
+
       // Toggle current dropdown
       dropdown.classList.toggle('open', !isOpen);
       this.classList.toggle('active', !isOpen);
     });
   });
-  
+
   // Close dropdowns when clicking outside
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.filter-group')) {
@@ -433,13 +489,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   });
-  
+
   // Get selected values from checkboxes
   const getSelectedValues = (dropdown) => {
     const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
     return Array.from(checkboxes).map(cb => cb.value);
   };
-  
+
   // Update selected count display
   const updateSelectedCount = (toggle, dropdown) => {
     if (!toggle || !dropdown) return;
@@ -454,16 +510,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   };
-  
+
   // Handle checkbox changes
   filterDropdowns.forEach(dropdown => {
     const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
     const toggle = dropdown.previousElementSibling;
-    
+
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', function() {
         const allCheckbox = dropdown.querySelector('input[type="checkbox"][value="all"]');
-        
+
         if (this.value === 'all') {
           // If "All" is checked, uncheck all others
           if (this.checked) {
@@ -476,56 +532,197 @@ document.addEventListener('DOMContentLoaded', function() {
           if (this.checked) {
             allCheckbox.checked = false;
           }
-          
+
           // If nothing is selected, check "All"
           const hasSelection = Array.from(checkboxes).some(cb => cb !== allCheckbox && cb.checked);
           if (!hasSelection) {
             allCheckbox.checked = true;
           }
         }
-        
+
         updateSelectedCount(toggle, dropdown);
+
+        // Reset pagination when filters change
+        const sectionName = dropdown.dataset.section;
+        if (sectionName && paginationState[sectionName]) {
+          paginationState[sectionName].page = 1;
+        }
+
         applyFilters();
       });
     });
-    
+
     // Initial count update
     updateSelectedCount(toggle, dropdown);
   });
-  
+
   // Filtering per section
   const sections = document.querySelectorAll('.collapsible-section');
-  
+
+  // Get visible rows that match current filters
+  const getFilteredRows = (section) => {
+    const yearDropdown = section.querySelector('.filter-year');
+    const authorDropdown = section.querySelector('.filter-author');
+    const table = section.querySelector('.data-table');
+
+    if (!table) return [];
+
+    const selectedYears = yearDropdown ? getSelectedValues(yearDropdown) : ['all'];
+    const selectedAuthors = authorDropdown ? getSelectedValues(authorDropdown) : ['all'];
+
+    const rows = table.querySelectorAll('tbody tr');
+    const filteredRows = [];
+
+    rows.forEach(row => {
+      const rowYear = row.getAttribute('data-year');
+      const rowAuthor = row.getAttribute('data-author');
+      const matchYear = selectedYears.includes('all') || selectedYears.includes(rowYear);
+      const matchAuthor = selectedAuthors.includes('all') || selectedAuthors.includes(rowAuthor);
+      if (matchYear && matchAuthor) {
+        filteredRows.push(row);
+      }
+    });
+
+    return filteredRows;
+  };
+
+  // Apply pagination to a section
+  const applyPagination = (section, sectionName) => {
+    const state = paginationState[sectionName];
+    if (!state) return;
+
+    const filteredRows = getFilteredRows(section);
+    const table = section.querySelector('.data-table');
+    const allRows = table ? table.querySelectorAll('tbody tr') : [];
+
+    // First hide all rows
+    allRows.forEach(row => row.style.display = 'none');
+
+    if (state.showAll) {
+      // Show all filtered rows
+      filteredRows.forEach(row => row.style.display = '');
+    } else {
+      // Apply pagination
+      const startIndex = (state.page - 1) * state.perPage;
+      const endIndex = startIndex + state.perPage;
+
+      filteredRows.forEach((row, index) => {
+        if (index >= startIndex && index < endIndex) {
+          row.style.display = '';
+        }
+      });
+    }
+
+    // Hide table if no rows match
+    if (table) {
+      table.style.display = filteredRows.length > 0 ? '' : 'none';
+    }
+
+    // Update pagination UI
+    updatePaginationUI(section, sectionName, filteredRows.length);
+  };
+
+  // Update pagination UI elements
+  const updatePaginationUI = (section, sectionName, totalRows) => {
+    const state = paginationState[sectionName];
+    const paginationContainer = section.querySelector('.section-pagination');
+
+    if (!paginationContainer || !state) return;
+
+    const prevBtn = paginationContainer.querySelector('.pagination-prev');
+    const nextBtn = paginationContainer.querySelector('.pagination-next');
+    const allBtn = paginationContainer.querySelector('.pagination-all');
+    const infoSpan = paginationContainer.querySelector('.pagination-info');
+
+    const totalPages = Math.ceil(totalRows / state.perPage);
+
+    if (state.showAll) {
+      // Show all mode
+      if (infoSpan) infoSpan.textContent = `Showing all ${totalRows} items`;
+      if (prevBtn) prevBtn.disabled = true;
+      if (nextBtn) nextBtn.disabled = true;
+      if (allBtn) allBtn.textContent = 'Show Less';
+    } else {
+      // Paginated mode
+      if (infoSpan) {
+        if (totalPages === 0) {
+          infoSpan.textContent = 'No items';
+        } else {
+          infoSpan.textContent = `Page ${state.page} of ${totalPages}`;
+        }
+      }
+      if (prevBtn) prevBtn.disabled = state.page <= 1;
+      if (nextBtn) nextBtn.disabled = state.page >= totalPages;
+      if (allBtn) allBtn.textContent = 'Select All';
+    }
+
+    // Hide pagination if only one page and not in showAll mode
+    if (totalPages <= 1 && !state.showAll) {
+      paginationContainer.style.display = totalRows > 0 ? 'flex' : 'none';
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      if (allBtn) allBtn.style.display = totalRows > state.perPage ? '' : 'none';
+    } else {
+      paginationContainer.style.display = 'flex';
+      if (prevBtn) prevBtn.style.display = '';
+      if (nextBtn) nextBtn.style.display = '';
+      if (allBtn) allBtn.style.display = '';
+    }
+  };
+
   const applyFilters = () => {
     sections.forEach(section => {
-      const yearDropdown = section.querySelector('.filter-year');
-      const authorDropdown = section.querySelector('.filter-author');
-      const table = section.querySelector('.data-table');
-      
-      if (!table) return;
-      
-      const selectedYears = yearDropdown ? getSelectedValues(yearDropdown) : ['all'];
-      const selectedAuthors = authorDropdown ? getSelectedValues(authorDropdown) : ['all'];
-      
-      const rows = table.querySelectorAll('tbody tr');
-      let visibleRows = 0;
-      
-      rows.forEach(row => {
-        const rowYear = row.getAttribute('data-year');
-        const rowAuthor = row.getAttribute('data-author');
-        const matchYear = selectedYears.includes('all') || selectedYears.includes(rowYear);
-        const matchAuthor = selectedAuthors.includes('all') || selectedAuthors.includes(rowAuthor);
-        const shouldShow = matchYear && matchAuthor;
-        row.style.display = shouldShow ? '' : 'none';
-        if (shouldShow) visibleRows++;
-      });
-      
-      // Hide table if no rows match
-      table.style.display = visibleRows > 0 ? '' : 'none';
+      const sectionName = section.dataset.section;
+      applyPagination(section, sectionName);
     });
   };
-  
-  // Initial filter application
+
+  // Set up pagination button handlers
+  document.querySelectorAll('.section-pagination').forEach(paginationContainer => {
+    const sectionName = paginationContainer.dataset.section;
+    const section = document.querySelector(`.collapsible-section[data-section="${sectionName}"]`);
+
+    if (!section || !paginationState[sectionName]) return;
+
+    const prevBtn = paginationContainer.querySelector('.pagination-prev');
+    const nextBtn = paginationContainer.querySelector('.pagination-next');
+    const allBtn = paginationContainer.querySelector('.pagination-all');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const state = paginationState[sectionName];
+        if (state.page > 1) {
+          state.page--;
+          applyPagination(section, sectionName);
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const state = paginationState[sectionName];
+        const filteredRows = getFilteredRows(section);
+        const totalPages = Math.ceil(filteredRows.length / state.perPage);
+        if (state.page < totalPages) {
+          state.page++;
+          applyPagination(section, sectionName);
+        }
+      });
+    }
+
+    if (allBtn) {
+      allBtn.addEventListener('click', () => {
+        const state = paginationState[sectionName];
+        state.showAll = !state.showAll;
+        if (!state.showAll) {
+          state.page = 1;
+        }
+        applyPagination(section, sectionName);
+      });
+    }
+  });
+
+  // Initial filter and pagination application
   applyFilters();
 });
 </script>
