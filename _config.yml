@@ -59,6 +59,8 @@ social:
 # =============================================================================
 # Giscus Comments Configuration
 # =============================================================================
+# Set to true to turn on comments site-wide (requires Giscus setup below)
+comments_enabled: false
 # To set up Giscus:
 # 1. Go to https://github.com/apps/giscus and install on your repo
 # 2. Enable Discussions on your repository (Settings > Features > Discussions)

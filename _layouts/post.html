@@ -117,7 +117,7 @@ layout: default
   {% endif %}
   
   <!-- Comments -->
-  {% if page.comments != false and site.giscus.repo_id != "[ENTER REPO ID FROM GISCUS.APP]" %}
+  {% if site.comments_enabled != false and page.comments != false and site.giscus.repo_id != "[ENTER REPO ID FROM GISCUS.APP]" %}
   {% include comments.html %}
   {% endif %}
 </article>
