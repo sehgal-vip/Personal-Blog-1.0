@@ -52,7 +52,7 @@ permalink: /projects/
         <tr data-year="{{ project.year }}">
           <td class="title-cell" data-label="Title">
             {% if project.url and project.url != "" %}
-            <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
+            {% if project.url contains "http" %}<a href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>{% else %}<a href="{{ project.url | relative_url }}">{{ project.title }}</a>{% endif %}
             {% else %}
             {{ project.title }}
             {% endif %}
