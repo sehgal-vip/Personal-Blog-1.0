@@ -20,6 +20,12 @@ navigation:
     url: "/projects/"
     icon: "folder"
     
+  - name: "Go to Text Editor"
+    shortcut: "ge"
+    action: "navigate"
+    url: "/projects/texteditor/"
+    icon: "edit"
+    
   - name: "Go to Reading"
     shortcut: "gr"
     action: "navigate"
