@@ -2005,6 +2005,11 @@ strong, b {
     align-items: center;
     gap: 0.25rem;
 
+    &.pagination-selected {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
     svg {
       width: 14px;
       height: 14px;

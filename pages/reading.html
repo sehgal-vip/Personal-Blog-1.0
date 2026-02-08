@@ -625,6 +625,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (selectedRow && selectedRow.style.display === 'none') {
       setSelectedRow(null);
     }
+    refreshPaginationSelection(section);
   };
 
   // Update pagination UI elements
@@ -729,7 +730,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Keyboard navigation
   const selectionClass = 'row-selected';
+  const paginationSelectionClass = 'pagination-selected';
   let selectedRow = null;
+  let selectedPagination = null;
 
   const isTypingInInput = (el) => {
     if (!el) return false;
@@ -750,7 +753,32 @@ document.addEventListener('DOMContentLoaded', function() {
       .filter(row => row.style.display !== 'none');
   };
 
+  const getPaginationButtons = (section) => {
+    if (!section) return [];
+    const container = section.querySelector('.section-pagination');
+    if (!container || container.style.display === 'none') return [];
+    return Array.from(container.querySelectorAll('.pagination-btn'))
+      .filter(btn => btn.style.display !== 'none' && !btn.disabled);
+  };
+
+  const clearPaginationSelection = () => {
+    if (selectedPagination) {
+      selectedPagination.classList.remove(paginationSelectionClass);
+      selectedPagination.removeAttribute('aria-selected');
+      selectedPagination = null;
+    }
+  };
+
+  const refreshPaginationSelection = (section) => {
+    if (!selectedPagination) return;
+    if (!section || !section.contains(selectedPagination)) return;
+    if (selectedPagination.disabled || selectedPagination.style.display === 'none') {
+      clearPaginationSelection();
+    }
+  };
+
   const setSelectedRow = (row) => {
+    clearPaginationSelection();
     if (selectedRow) {
       selectedRow.classList.remove(selectionClass);
       selectedRow.removeAttribute('aria-selected');
@@ -763,10 +791,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  const setSelectedPagination = (button) => {
+    if (selectedRow) {
+      selectedRow.classList.remove(selectionClass);
+      selectedRow.removeAttribute('aria-selected');
+      selectedRow = null;
+    }
+    if (selectedPagination) {
+      selectedPagination.classList.remove(paginationSelectionClass);
+      selectedPagination.removeAttribute('aria-selected');
+    }
+    selectedPagination = button;
+    if (selectedPagination) {
+      selectedPagination.classList.add(paginationSelectionClass);
+      selectedPagination.setAttribute('aria-selected', 'true');
+      selectedPagination.scrollIntoView({ block: 'nearest' });
+    }
+  };
+
   const openSelectedRowLink = () => {
     if (!selectedRow) return;
     const link = selectedRow.querySelector('a');
     if (link) link.click();
+  };
+
+  const openSelectedPagination = () => {
+    if (!selectedPagination) return;
+    selectedPagination.click();
   };
 
   const getSectionIndex = (section) => {
@@ -810,6 +861,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const allSections = Array.from(sections);
     if (!allSections.length) return;
 
+    if (selectedPagination) {
+      const currentSection = selectedPagination.closest('.collapsible-section');
+      if (!currentSection) {
+        clearPaginationSelection();
+        return;
+      }
+      const buttons = getPaginationButtons(currentSection);
+      if (!buttons.length) {
+        clearPaginationSelection();
+        return;
+      }
+      const index = buttons.indexOf(selectedPagination);
+      if (direction === 'down') {
+        if (index < buttons.length - 1) {
+          setSelectedPagination(buttons[index + 1]);
+          return;
+        }
+        const nextSection = getNextSectionWithRows(getSectionIndex(currentSection));
+        moveToSection(nextSection, 'start');
+        return;
+      }
+      if (direction === 'up') {
+        if (index > 0) {
+          setSelectedPagination(buttons[index - 1]);
+          return;
+        }
+        const rows = getVisibleRows(currentSection);
+        if (rows.length) {
+          setSelectedRow(rows[rows.length - 1]);
+        } else {
+          const prevSection = getPrevSectionWithRows(getSectionIndex(currentSection));
+          moveToSection(prevSection, 'end');
+        }
+        return;
+      }
+    }
+
     if (!selectedRow) {
       if (direction === 'down') {
         const firstSection = getNextSectionWithRows(-1);
@@ -833,16 +921,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setSelectedRow(visibleRows[rowIndex + 1]);
         return;
       }
-      if (state && !state.showAll) {
-        const filteredRows = getFilteredRows(currentSection);
-        const totalPages = Math.ceil(filteredRows.length / state.perPage);
-        if (state.page < totalPages) {
-          state.page++;
-          applyPagination(currentSection, sectionName);
-          const rows = getVisibleRows(currentSection);
-          if (rows.length) setSelectedRow(rows[0]);
-          return;
-        }
+      const buttons = getPaginationButtons(currentSection);
+      if (buttons.length) {
+        setSelectedPagination(buttons[0]);
+        return;
       }
       const nextSection = getNextSectionWithRows(getSectionIndex(currentSection));
       moveToSection(nextSection, 'start');
@@ -851,14 +933,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setSelectedRow(visibleRows[rowIndex - 1]);
         return;
       }
-      if (state && !state.showAll) {
-        if (state.page > 1) {
-          state.page--;
-          applyPagination(currentSection, sectionName);
-          const rows = getVisibleRows(currentSection);
-          if (rows.length) setSelectedRow(rows[rows.length - 1]);
-          return;
-        }
+      const buttons = getPaginationButtons(currentSection);
+      if (buttons.length) {
+        setSelectedPagination(buttons[buttons.length - 1]);
+        return;
       }
       const prevSection = getPrevSectionWithRows(getSectionIndex(currentSection));
       moveToSection(prevSection, 'end');
@@ -877,9 +955,13 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       moveSelection('up');
     } else if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
-      if (selectedRow) {
+      if (selectedRow || selectedPagination) {
         e.preventDefault();
-        openSelectedRowLink();
+        if (selectedRow) {
+          openSelectedRowLink();
+        } else {
+          openSelectedPagination();
+        }
       }
     }
   });
