@@ -2005,11 +2005,6 @@ strong, b {
     align-items: center;
     gap: 0.25rem;
 
-    &.pagination-selected {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-
     svg {
       width: 14px;
       height: 14px;
@@ -2024,6 +2019,12 @@ strong, b {
 
   .pagination-all {
     margin-left: 0.5rem;
+  }
+
+  &.pagination-selected {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 10px;
   }
 }
 
@@ -2726,6 +2727,10 @@ strong, b {
       outline: 2px solid var(--color-primary);
       outline-offset: -2px;
     }
+
+    tbody tr.row-selected td {
+      background: var(--bg-tertiary);
+    }
     
     tbody tr:nth-child(even) {
       background: transparent;
@@ -3264,5 +3269,16 @@ strong, b {
     color: #000;
     text-decoration: underline;
   }
+}
+
+// Keyboard selection fallback for tables
+.row-selected {
+  background: var(--bg-tertiary);
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.row-selected td {
+  background: var(--bg-tertiary);
 }
 

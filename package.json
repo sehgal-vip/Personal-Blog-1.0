@@ -1,0 +1,24 @@
+{
+  "name": "sehgal-vip.github.io",
+  "version": "1.0.0",
+  "description": "A beautiful, minimalist blog built with Jekyll for GitHub Pages. Features a powerful command palette (⌘K), dark/light mode, and a zero-code publishing workflow.",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sehgal-vip/sehgal-vip.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sehgal-vip/sehgal-vip.github.io/issues"
+  },
+  "homepage": "https://github.com/sehgal-vip/sehgal-vip.github.io#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

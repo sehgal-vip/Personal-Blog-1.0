@@ -20,6 +20,8 @@ Gemfile.lock
 
 # Node (if using any npm packages)
 node_modules/
+test-results/
+playwright-report/
 
 # Environment files
 .env

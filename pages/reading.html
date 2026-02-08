@@ -772,7 +772,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const refreshPaginationSelection = (section) => {
     if (!selectedPagination) return;
     if (!section || !section.contains(selectedPagination)) return;
-    if (selectedPagination.disabled || selectedPagination.style.display === 'none') {
+    if (selectedPagination.style.display === 'none') {
       clearPaginationSelection();
     }
   };
@@ -809,6 +809,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  const getPaginationTarget = (section, direction) => {
+    const buttons = getPaginationButtons(section);
+    if (!buttons.length) return null;
+    const nextBtn = section.querySelector('.pagination-next');
+    const prevBtn = section.querySelector('.pagination-prev');
+    const allBtn = section.querySelector('.pagination-all');
+    if (direction === 'down') {
+      if (nextBtn && !nextBtn.disabled && nextBtn.style.display !== 'none') return nextBtn;
+      if (allBtn && !allBtn.disabled && allBtn.style.display !== 'none') return allBtn;
+      if (prevBtn && !prevBtn.disabled && prevBtn.style.display !== 'none') return prevBtn;
+    } else {
+      if (prevBtn && !prevBtn.disabled && prevBtn.style.display !== 'none') return prevBtn;
+      if (allBtn && !allBtn.disabled && allBtn.style.display !== 'none') return allBtn;
+      if (nextBtn && !nextBtn.disabled && nextBtn.style.display !== 'none') return nextBtn;
+    }
+    return buttons[0] || null;
+  };
+
   const openSelectedRowLink = () => {
     if (!selectedRow) return;
     const link = selectedRow.querySelector('a');
@@ -824,16 +842,20 @@ document.addEventListener('DOMContentLoaded', function() {
     return Array.from(sections).indexOf(section);
   };
 
+  const sectionHasRows = (section) => {
+    return !!section && !!section.querySelector('tbody tr');
+  };
+
   const getNextSectionWithRows = (fromIndex) => {
     for (let i = fromIndex + 1; i < sections.length; i++) {
-      if (getVisibleRows(sections[i]).length > 0) return sections[i];
+      if (sectionHasRows(sections[i])) return sections[i];
     }
     return null;
   };
 
   const getPrevSectionWithRows = (fromIndex) => {
     for (let i = fromIndex - 1; i >= 0; i--) {
-      if (getVisibleRows(sections[i]).length > 0) return sections[i];
+      if (sectionHasRows(sections[i])) return sections[i];
     }
     return null;
   };
@@ -867,26 +889,12 @@ document.addEventListener('DOMContentLoaded', function() {
         clearPaginationSelection();
         return;
       }
-      const buttons = getPaginationButtons(currentSection);
-      if (!buttons.length) {
-        clearPaginationSelection();
-        return;
-      }
-      const index = buttons.indexOf(selectedPagination);
       if (direction === 'down') {
-        if (index < buttons.length - 1) {
-          setSelectedPagination(buttons[index + 1]);
-          return;
-        }
         const nextSection = getNextSectionWithRows(getSectionIndex(currentSection));
         moveToSection(nextSection, 'start');
         return;
       }
       if (direction === 'up') {
-        if (index > 0) {
-          setSelectedPagination(buttons[index - 1]);
-          return;
-        }
         const rows = getVisibleRows(currentSection);
         if (rows.length) {
           setSelectedRow(rows[rows.length - 1]);
@@ -921,9 +929,9 @@ document.addEventListener('DOMContentLoaded', function() {
         setSelectedRow(visibleRows[rowIndex + 1]);
         return;
       }
-      const buttons = getPaginationButtons(currentSection);
-      if (buttons.length) {
-        setSelectedPagination(buttons[0]);
+      const paginationTarget = getPaginationTarget(currentSection, 'down');
+      if (paginationTarget) {
+        setSelectedPagination(paginationTarget);
         return;
       }
       const nextSection = getNextSectionWithRows(getSectionIndex(currentSection));
@@ -933,9 +941,9 @@ document.addEventListener('DOMContentLoaded', function() {
         setSelectedRow(visibleRows[rowIndex - 1]);
         return;
       }
-      const buttons = getPaginationButtons(currentSection);
-      if (buttons.length) {
-        setSelectedPagination(buttons[buttons.length - 1]);
+      const paginationTarget = getPaginationTarget(currentSection, 'up');
+      if (paginationTarget) {
+        setSelectedPagination(paginationTarget);
         return;
       }
       const prevSection = getPrevSectionWithRows(getSectionIndex(currentSection));
