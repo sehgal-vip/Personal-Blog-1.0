@@ -202,7 +202,7 @@ body {
   background: rgb(0, 128, 128); // teal
   opacity: 0;
   z-index: 999; // below header (z-index: 1000)
-  transition: opacity 0.15s ease;
+  transition: width 0.1s linear, opacity 0.15s ease;
   pointer-events: none;
 }
 
